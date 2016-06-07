@@ -141,17 +141,11 @@ Please direct any questions regarding Hackifieds to [**our wiki page**](https://
 
 ## Meta
 
-### Project Engineers
+## Team
 
-Development Team
-- [**Malavika Neti**](https://github.com/malaneti)
-- [**Brett Lensvelt**](https://github.com/lensvelt)
-
-Scrum Master
-- [**Andrew Phavichitr**](https://github.com/aphavichitr)
-
-Product Owner
-- [**Gabriel F.**](https://github.com/gfncodes)
+  - __Product Owner__: Sepehr
+  - __Scrum Master__: Shane
+  - __Development Team Members__: Sepehr, Shane, Leo, Tai
 
 ### License
 
