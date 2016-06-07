@@ -12,6 +12,7 @@ module.exports = (app) => {
   app.post('/api/listings', listingsController.addListing);
   app.get('/api/listings', listingsController.getListings);
 
+
   app.get('/', (req, res) => {
     res.sendFile(path.resolve('client/index.html'));
   });
