@@ -1,29 +1,3 @@
-# FILESYSTEM
+node_modules
 .DS_Store
-.DS_Store?
-.Trashes
-.LSOverride
-.Spotlight-V100
-Thumbs.db
-.AppleDouble
-
-# DEV
-._*
-node_modules/
-compiled/
-client/dist/
-npm-debug.log
-github_oauth.js
-uploads/
-
-# Floobits
-.floo
-.floobit
-.floo
-.flooignore
-
-# VIM
-*.swp
-*.swo
-*~
-*.viminfo
+dist/images
