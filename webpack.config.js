@@ -1,27 +1,29 @@
+const webpack = require('webpack');
+const path = require('path');
+
 module.exports = {
-  // entry point needs to be entry.jsx
-  entry: './client/index.jsx',
-  // webpack output to client/dist/bundle.js
+  devtool: 'inline-source-map',
+  entry: ['webpack-hot-middleware/client', './client/client.js'],
   output: {
-    path: './client/dist',
-    publicPath: './client/dist',
-    filename: 'bundle.js'
+    path: path.resolve('./dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+  ],
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        // regular expression for .jsx or .js
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        loader: 'babel',
         query: {
-          presets: ['react', 'es2015']
-        }
+          presets: ['react', 'es2015', 'react-hmre'],
+        },
       },
-      {
-        test: /\.css$/,
-        loader: 'style!css?modules'
-      }
-    ]
-  }
+    ],
+  },
 };
