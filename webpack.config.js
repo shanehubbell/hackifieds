@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
   devtool: 'inline-source-map',
   entry: ['webpack-hot-middleware/client', './client/client.js'],
+
   output: {
     path: path.resolve('./dist'),
     filename: 'bundle.js',
@@ -26,4 +27,5 @@ module.exports = {
       },
     ],
   },
+
 };
