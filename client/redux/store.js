@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
-import reducer from './reducer';
+import reducers from './reducers';
 
 const initialState = {
   listings: {
@@ -14,7 +14,8 @@ const initialState = {
       distanceFromHR: 2,
       crimeRate: 3,
       address: '123 Street',
-      email: 'email@email.com',
+      ownerEmail: 'email@email.com',
+      ownerName: 'Bob',
       url: 'www.website.com',
       images: [],
       reviews: [],
@@ -33,9 +34,10 @@ const initialState = {
       reviews: [],
     },
   },
+  displayedListings: {},
 };
 
-const store = createStore(reducer, initialState);
+const store = createStore(reducers, initialState);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 
