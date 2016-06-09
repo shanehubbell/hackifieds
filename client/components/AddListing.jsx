@@ -114,7 +114,11 @@ class AddListing extends React.Component {
 
         pictures={this.state.pictures}
       />
-      <button onClick={this.handleSubmitForm} >Submit</button>
+      <button
+        onClick={this.handleSubmitForm}
+        type="submit"
+        className="pure-button pure-button-primary"
+      >Submit</button>
     </div>);
   }
 }
