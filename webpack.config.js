@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
   devtool: 'inline-source-map',
   entry: ['webpack-hot-middleware/client', './client/client.js'],
+
   output: {
     path: path.resolve('./dist'),
     filename: 'bundle.js',
@@ -15,13 +16,13 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
   ],
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'eslint',
-        exclude: /(node_modules|bower_components)/,
-      },
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.jsx?$/,
+    //     loader: 'eslint',
+    //     exclude: /(node_modules|bower_components)/,
+    //   },
+    // ],
     loaders: [
       {
         test: /\.jsx?$/,
