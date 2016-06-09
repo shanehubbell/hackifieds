@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import AddListing from './AddListing.jsx';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from '../redux/actions';
+import Main from './Main.jsx';
 
-class App extends Component {
+const mapStateToProps = function mapStateToProps(state) {
+  return {
+    listings: state.listings,
+  };
+};
 
-  constructor(props) {
-    super(props);
-    this.state = {
+const mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+};
 
-    };
-  }
-  render() {
-    return (<div> APP.JSX
-      <AddListing />
-    </div>);
-  }
-}
+const App = connect(mapStateToProps, mapDispatchToProps)(Main);
+
 
 export default App;
