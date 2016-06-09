@@ -4,7 +4,12 @@ module.exports = {
   getListings: function getListings(req, res) {
     db.Listing.findAll({ where: {} })
     .then((listings) => {
-      res.end(JSON.stringify(listings));
+      const response = listings.reduce((accu, curr, index) => {
+        const obj = accu;
+        obj[index + 1] = curr;
+        return accu;
+      }, {});
+      res.end(JSON.stringify(response));
     })
     .catch((error) => {
       console.error(error);

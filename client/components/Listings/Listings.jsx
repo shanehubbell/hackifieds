@@ -6,7 +6,7 @@ const Listings = (props) => (
   <div className="listings">
     <h1>Listings</h1>
     <FilterContainer />
-    <TableViewContainer displayedListings={props.displayedListings} />
+    <TableViewContainer />
   </div>
 );
 

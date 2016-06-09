@@ -17,7 +17,7 @@ class TableViewContainer extends Component {
 
 const mapStateToProps = function mapStateToProps(state) {
   return {
-    displayedListings: state.displayedListings,
+    filteredListings: state.filteredListings,
   };
 };
 
