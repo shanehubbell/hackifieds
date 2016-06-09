@@ -1,5 +1,9 @@
 const express = require('express');
 
+// auth
+const passport = require('passport');
+const Strategy = require('passport-github2').Strategy;
+
 // connect to mongoose
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/hackPictures');

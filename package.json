@@ -30,12 +30,12 @@
     "mongoose": "^4.4.20",
     "multer": "^1.1.0",
     "nodemon": "^1.9.2",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
     "q": "^1.4.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-dropzone": "^3.5.0",
-    "superagent": "^2.0.0",
-    "webpack": "^1.13.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.5",
@@ -43,7 +43,9 @@
     "redux-logger": "^2.6.1",
     "require": "^2.4.20",
     "sequelize": "^3.23.3",
-    "underscore": "^1.8.3"
+    "superagent": "^2.0.0",
+    "underscore": "^1.8.3",
+    "webpack": "^1.13.1"
   },
   "repository": {
     "type": "git",
