@@ -21,6 +21,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-register": "^6.9.0",
     "body-parser": "^1.15.1",
+    "cluster": "^0.7.7",
     "eslint": "^2.11.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.8.1",
