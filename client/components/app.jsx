@@ -10,7 +10,7 @@ const Nav = () => (
             <Link className="pure-menu-link" to="/">HackBnB</Link>
           </li>
           <li className="pure-menu-item">
-            <Link className="pure-menu-link" to="/listing">See Listings</Link>
+            <Link className="pure-menu-link" to="/listings">See Listings</Link>
           </li>
           <li className="pure-menu-item">
             <Link className="pure-menu-link" to="/add-listing"> Post a Listing</Link>

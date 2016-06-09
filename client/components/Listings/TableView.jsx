@@ -5,8 +5,9 @@ const TableView = (props) => (
   <div className="tableView">
     <h1>TableView</h1>
     <ul>
-      {Object.keys(props.displayedListings).map((listingId) =>
-        (<TableViewItem listing={props.displayedListings[listingId]} />)
+      {console.log('filteredListings insdie table view', props)}
+      {Object.keys(props.filteredListings).map((listingId) =>
+        (<TableViewItem key={listingId} listing={props.filteredListings[listingId]} />)
       )}
     </ul>
   </div>

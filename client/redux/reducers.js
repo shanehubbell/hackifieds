@@ -7,14 +7,19 @@ const listingsReducer = (state = {}, action) => {
       return [...state, {}];
 
     case 'SET_LISTINGS':
-      return Object.assign({}, state, {
-        listings: action.listings,
-      });
+      console.log('SET_LISTINGS==>>', action.listings);
+      console.log('STATE====>', state);
+      return Object.assign({}, state, action.listings);
 
+    default:
+      return state;
+  }
+};
+
+const filteredListingsReducer = (state = {}, action) => {
+  switch (action.type) {
     case 'SET_FILTERED_LISTINGS':
-      return Object.assign({}, {
-        filteredListings: action.listings,
-      });
+      return Object.assign({}, state, action.filteredListings);
 
     default:
       return state;
@@ -22,7 +27,11 @@ const listingsReducer = (state = {}, action) => {
 };
 
 const rootReducer = combineReducers(
-  { listings: listingsReducer, routing: routerReducer }
+  {
+    filteredListings: filteredListingsReducer,
+    listings: listingsReducer,
+    routing: routerReducer,
+  }
 );
 
 export default rootReducer;
