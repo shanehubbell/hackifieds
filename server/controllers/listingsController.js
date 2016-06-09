@@ -19,7 +19,7 @@ module.exports = {
   },
   addListing: function addListing(req, res) {
     console.log(req.body);
-    db.Listing.create({ address: req.body.address, price: req.body.price,
+    db.Listing.create({ userId: req.user.id, address: req.body.address, price: req.body.price,
       bathrooms: req.body.bathrooms, private: JSON.parse(req.body.private),
       ownerEmail: req.body.ownerEmail, ownerName: req.body.ownerName,
       description: req.body.description, pictures: req.body.pictures })
