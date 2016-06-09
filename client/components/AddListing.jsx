@@ -93,32 +93,37 @@ class AddListing extends React.Component {
   }
 
   render() {
-    return (<div> ADD LISTING COMPONENT
-      <FileUpload handleFile={this.handleFileChange} />
-      <TextForm
-        address={this.state.address}
-        price={this.state.price}
-        bathrooms={this.state.bathrooms}
-        private={this.state.private}
-        ownerName={this.state.ownerName}
-        ownerEmail={this.state.ownerEmail}
-        description={this.state.description}
+    return (<div>
+      <form className="pure-form pure-form-stacked">
+        <fieldset>
+          <legend>Add Listing</legend>
+          <FileUpload handleFile={this.handleFileChange} />
+          <TextForm
+            address={this.state.address}
+            price={this.state.price}
+            bathrooms={this.state.bathrooms}
+            private={this.state.private}
+            ownerName={this.state.ownerName}
+            ownerEmail={this.state.ownerEmail}
+            description={this.state.description}
 
-        handleAddressChange={this.handleAddressChange}
-        handlePriceChange={this.handlePriceChange}
-        handleBathroomsChange={this.handleBathroomsChange}
-        handlePrivateChange={this.handlePrivateChange}
-        handleOwnerNameChange={this.handleOwnerNameChange}
-        handleOwnerEmailChange={this.handleOwnerEmailChange}
-        handleDescriptionChange={this.handleDescriptionChange}
+            handleAddressChange={this.handleAddressChange}
+            handlePriceChange={this.handlePriceChange}
+            handleBathroomsChange={this.handleBathroomsChange}
+            handlePrivateChange={this.handlePrivateChange}
+            handleOwnerNameChange={this.handleOwnerNameChange}
+            handleOwnerEmailChange={this.handleOwnerEmailChange}
+            handleDescriptionChange={this.handleDescriptionChange}
 
-        pictures={this.state.pictures}
-      />
-      <button
-        onClick={this.handleSubmitForm}
-        type="submit"
-        className="pure-button pure-button-primary"
-      >Submit</button>
+            pictures={this.state.pictures}
+          />
+          <button
+            onClick={this.handleSubmitForm}
+            type="submit"
+            className="pure-button pure-button-primary"
+          >Submit</button>
+        </fieldset>
+      </form>
     </div>);
   }
 }
