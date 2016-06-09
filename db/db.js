@@ -22,6 +22,6 @@ const Listing = db.define('Listing', {
 });
 
 db.sync().then(() => console.log('done creating tables'))
-  .catch(() => console.log('error syncing database'));
+  .catch((err) => console.log('error syncing database ==>', err));
 
 exports.Listing = Listing;
