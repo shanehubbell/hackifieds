@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-const reducer = (state = {}, action) => {
+const listingsReducer = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_LISTING':
       return [...state, {}];
@@ -10,6 +10,8 @@ const reducer = (state = {}, action) => {
   }
 };
 
-const rootReducer = combineReducers({ listings: reducer, routing: routerReducer });
+const rootReducer = combineReducers(
+  { listings: listingsReducer, routing: routerReducer }
+);
 
 export default rootReducer;
