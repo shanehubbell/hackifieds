@@ -1,13 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+const Nav = () => (
+  <div className="header pure-menu-heading">
+    <div className="pure-menu pure-menu-fixed pure-menu-horizontal home-menu">
+      <nav className="pure-menu-list">
+        <ul>
+          <li className="pure-menu-item">
+            <Link className="pure-menu-link" to="/">HackB2B</Link>
+          </li>
+          <li className="pure-menu-item">
+            <Link className="pure-menu-link" to="/all-listings">See Listings</Link>
+          </li>
+          <li className="pure-menu-item">
+            <Link className="pure-menu-link" to="/add-listings"> Post a Listing</Link>
+          </li>
+          <li className="pure-menu-item">
+            <Link className="pure-menu-link" to="/single-listings"> Listing</Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+);
+
 const Main = (props) => (
-  <div>
-    <h1>
-      <Link to="/">HackB2B</Link><br />
-      <Link to="/listings">Listings</Link><br />
-      <Link to="/add-listings">Add Listings</Link><br />
-    </h1>
+  <div className="header pure-menu-heading">
+    <Nav />
+    <br /><br /><br /><br />
     {props.children}
   </div>
 );
@@ -17,18 +37,3 @@ Main.propTypes = {
 };
 
 export default Main;
-
-// class App extends Component {
-
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-
-//     };
-//   }
-//   render() {
-//     return (<div> APP.JSX
-//       <AddListing />
-//     </div>);
-//   }
-// }
