@@ -22,6 +22,7 @@ passport.use(new Strategy({
 },
 (accessToken, refreshToken, profile, done) => {
   console.log(profile);
+  // if fail done(null, false)
   process.nextTick(() => {
     done(null, profile);
   });

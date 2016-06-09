@@ -2,6 +2,7 @@ const db = require('../../db/db');
 
 module.exports = {
   getListings: function getListings(req, res) {
+    // req.user.id
     db.Listing.findAll({ where: {} })
     .then((listings) => {
       const response = listings.reduce((accu, curr, index) => {
