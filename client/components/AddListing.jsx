@@ -9,16 +9,26 @@ class AddListing extends React.Component {
     super();
     this.state = {
       address: '',
-      ownerEmail: '',
       price: '',
-      pictures: [
-
-      ],
+      bathrooms: '',
+      private: false,
+      ownerName: '',
+      ownerEmail: '',
+      description: '',
+      pictures: [],
     };
+
     this.handleFileChange = this.handleFileChange.bind(this);
-    this.handleOwnerEmailChange = this.handleOwnerEmailChange.bind(this);
-    this.handlePriceChange = this.handlePriceChange.bind(this);
+
     this.handleAddressChange = this.handleAddressChange.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.handleBathroomsChange = this.handleBathroomsChange.bind(this);
+    this.handlePrivateChange = this.handlePrivateChange.bind(this);
+
+    this.handleOwnerNameChange = this.handleOwnerNameChange.bind(this);
+    this.handleOwnerEmailChange = this.handleOwnerEmailChange.bind(this);
+
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
 
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
   }
@@ -29,25 +39,54 @@ class AddListing extends React.Component {
     this.setState({ pictures: newPictures });
   }
 
-  handleOwnerEmailChange(event) {
-    this.setState({ ownerEmail: event.target.value });
+  handleAddressChange(event) {
+    this.setState({ address: event.target.value });
   }
 
   handlePriceChange(event) {
     this.setState({ price: event.target.value });
   }
 
-  handleAddressChange(event) {
-    this.setState({ address: event.target.value });
+  handleBathroomsChange(event) {
+    this.setState({ bathrooms: event.target.value });
   }
+
+  handlePrivateChange(event) {
+    this.setState({ private: event.target.checked });
+  }
+
+  handleOwnerNameChange(event) {
+    this.setState({ ownerName: event.target.value });
+  }
+
+  handleOwnerEmailChange(event) {
+    this.setState({ ownerEmail: event.target.value });
+  }
+
+  handleDescriptionChange(event) {
+    this.setState({ description: event.target.value });
+  }
+
+// address: '',
+//       price: '',
+//       bathrooms: '',
+//       private: false,
+//       ownerName: '',
+//       ownerEmail: '',
+//       description: '',
+//       pictures: [],
 
   handleSubmitForm() {
     request
       .post('/api/listings')
       .type('form')
-      .send({ ownerEmail: this.state.ownerEmail })
-      .send({ price: this.state.price })
       .send({ address: this.state.address })
+      .send({ price: this.state.price })
+      .send({ bathrooms: this.state.bathrooms })
+      .send({ private: this.state.private })
+      .send({ ownerName: this.state.ownerName })
+      .send({ ownerEmail: this.state.ownerEmail })
+      .send({ description: this.state.description })
       .send({ pictures: JSON.stringify(this.state.pictures) })
       .end((err, res) => {
       });
@@ -57,13 +96,21 @@ class AddListing extends React.Component {
     return (<div> ADD LISTING COMPONENT
       <FileUpload handleFile={this.handleFileChange} />
       <TextForm
-        ownerEmail={this.state.ownerEmail}
-        price={this.state.price}
         address={this.state.address}
+        price={this.state.price}
+        bathrooms={this.state.bathrooms}
+        private={this.state.private}
+        ownerName={this.state.ownerName}
+        ownerEmail={this.state.ownerEmail}
+        description={this.state.description}
 
-        handleOwnerEmailChange={this.handleOwnerEmailChange}
-        handlePriceChange={this.handlePriceChange}
         handleAddressChange={this.handleAddressChange}
+        handlePriceChange={this.handlePriceChange}
+        handleBathroomsChange={this.handleBathroomsChange}
+        handlePrivateChange={this.handlePrivateChange}
+        handleOwnerNameChange={this.handleOwnerNameChange}
+        handleOwnerEmailChange={this.handleOwnerEmailChange}
+        handleDescriptionChange={this.handleDescriptionChange}
 
         pictures={this.state.pictures}
       />

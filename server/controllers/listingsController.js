@@ -2,6 +2,7 @@ const db = require('../../db/db');
 
 module.exports = {
   getListings: function getListings(req, res) {
+    // req.user.id
     db.Listing.findAll({ where: {} })
     .then((listings) => {
       const response = listings.reduce((accu, curr, index) => {
@@ -18,11 +19,10 @@ module.exports = {
   },
   addListing: function addListing(req, res) {
     console.log(req.body);
-    db.Listing.create({ userId: '123', address: 'greenhaven', lat: '45',
-      lng: '44', distanceToHackReactor: '66', price: '$22.22',
-      bathrooms: '2', private: false, ownerEmail: 'james@gmail.com',
-      ownerName: 'James Marker', pictures: JSON.stringify(['ppp.jpg', 'img.png']),
-      description: 'funfun' })
+    db.Listing.create({ userId: req.user.id, address: req.body.address, price: req.body.price,
+      bathrooms: req.body.bathrooms, private: JSON.parse(req.body.private),
+      ownerEmail: req.body.ownerEmail, ownerName: req.body.ownerName,
+      description: req.body.description, pictures: req.body.pictures })
       .then((response) => {
         res.end(JSON.stringify(response.dataValues));
       })
@@ -32,4 +32,3 @@ module.exports = {
       });
   },
 };
-
