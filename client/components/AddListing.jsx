@@ -67,15 +67,6 @@ class AddListing extends React.Component {
     this.setState({ description: event.target.value });
   }
 
-// address: '',
-//       price: '',
-//       bathrooms: '',
-//       private: false,
-//       ownerName: '',
-//       ownerEmail: '',
-//       description: '',
-//       pictures: [],
-
   handleSubmitForm() {
     request
       .post('/api/listings')
