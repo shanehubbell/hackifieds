@@ -1,7 +1,7 @@
 const path = require('path');
 
 const imagesController = require('../images/imagesController.js');
-const listingsController = require('../listings/listingsController.js');
+const listingsController = require('../controllers/listingsController.js');
 
 const multer = require('multer');
 const upload = multer({ dest: 'dist/images/' });
