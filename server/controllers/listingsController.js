@@ -13,7 +13,7 @@ module.exports = {
   },
   addListing: function addListing(req, res) {
     console.log(req.body);
-    db.Listing.create({ price: '55', lat: '45' })
+    db.Listing.create({ userId: 'funfun' })
       .then((response) => {
         res.end(JSON.stringify(response.dataValues));
       })
