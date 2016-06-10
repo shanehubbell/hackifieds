@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
 import Filter from './Filter.jsx';
+import store from '../../redux/store.js';
 
 class FilterContainer extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class FilterContainer extends Component {
     });
     this.props.updateFilter(this.state.options, this.props.listings);
     console.log('heres filtered data...', this.props.filteredListings);
+    console.log('GET STORE-->', store.getState());
   }
 
   render() {
