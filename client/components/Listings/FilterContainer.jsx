@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
 import Filter from './Filter.jsx';
-import store from '../../redux/store.js';
 
 class FilterContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       options: {
-        private: true,
+        private: false,
         price: 3000,
       },
     };
     this.handlePrivateChange = this.handlePrivateChange.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
   }
 
   handlePrivateChange(e) {
@@ -23,8 +24,21 @@ class FilterContainer extends Component {
         price: this.state.options.price,
       },
     });
+  }
 
-    this.props.updateFilter(this.state.options, this.props.listings);
+  handlePriceChange(e) {
+    this.setState({
+      options: {
+        private: this.state.options.private,
+        price: +e.target.value,
+      },
+    });
+  }
+
+  handleFormChange() {
+    setTimeout(() => {
+      this.props.updateFilter(this.state.options, this.props.listings);
+    }, 100);
   }
 
   render() {
@@ -32,6 +46,9 @@ class FilterContainer extends Component {
       <Filter
         {...this.props}
         handlePrivateChange={this.handlePrivateChange}
+        handlePriceChange={this.handlePriceChange}
+        handleFormChange={this.handleFormChange}
+
         options={this.state.options}
       />
     );
@@ -47,7 +64,9 @@ const mapStateToProps = function mapStateToProps(state) {
 
 const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    updateFilter(options, listings) { dispatch(actions.updateFilteredListings(options, listings)); },
+    updateFilter(options, listings) {
+      dispatch(actions.updateFilteredListings(options, listings));
+    },
   };
 };
 
