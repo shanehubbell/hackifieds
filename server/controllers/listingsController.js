@@ -34,7 +34,7 @@ module.exports = {
   getListing: function getListing(listingId, callback) {
     db.Listing.findOne({ where: { listingId } })
       .then((listing) => {
-        callback(null, listing);
+        callback(null, listing.dataValues);
       })
       .catch((error) => {
         callback(error);

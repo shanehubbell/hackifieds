@@ -5,6 +5,11 @@ const Queue = require('./queueStack').Queue;
 const listingQueue = new Queue();
 
 const listingsController = require('./controllers/listingsController.js');
+const GoogleMapsAPI = require('googlemaps');
+const distance = require('google-distance-matrix');
+
+const keys = require('./auth/keys.js');
+
 
 const log = (p, msg) => {
   var name;
@@ -79,18 +84,71 @@ const httpJob = () => {
   require('./server.js');
 };
 
+const gmap = (listingId, address, done) => {
+  address = 'greenhaven mukilteo, WA';
+  distance.key = keys.GMAP_SECRET;
+  distance.units('imperial');
+
+  const publicConfig = {
+    key: keys.GMAP_SECRET,
+    secure: true,
+  };
+
+  const gmapAPI = new GoogleMapsAPI(publicConfig);
+
+  gmapAPI.geocode({ address }, (err, data) => {
+    const lat = data.results[0].geometry.location.lat;
+    const lng = data.results[0].geometry.location.lng;
+    console.log('gmap', lat, lng);
+  });
+
+  distance.matrix([address], ['8, 944 Market St, San Francisco, CA 94102'],
+    (err, data) => {
+      const distanceToHackReactor = {
+        miles: data.rows[0].elements[0].distance.text,
+        time: data.rows[0].elements[0].duration.text,
+      };
+      console.log('distance: ', distanceToHackReactor);
+    });
+
+  listingsController.updateListing(listingId, 101, 102, 55, (err) => {
+    if (!err) {
+      console.log('gmap done');
+    }
+    done();
+  });
+};
+
+const img = (pictures, done) => {
+  console.log(pictures);
+  done();
+};
+
 const workerJob = () => {
   // listen for new listings that need to be processed
   process.on('message', (listing) => {
     listingQueue.enqueue(listing);
   });
+
   const processListing = (listingId, callback) => {
+    var tasksLeft = 2;
     listingsController.getListing(listingId, (err, listing) => {
-      listing.userId = 123;
-      listing.save().then(() => {
-        console.log('processed', listing.userId);
-        callback(null);
-      });
+      if (!err) {
+        gmap(listingId, listing.address, () => {
+          if (--tasksLeft === 0) {
+            console.log('processed', listing.listingId);
+            callback(null);
+          }
+        });
+        img(JSON.parse(listing.pictures), () => {
+          if (--tasksLeft === 0) {
+            console.log('processed', listing.listingId);
+            callback(null);
+          }
+        });
+      } else {
+        console.log(err);
+      }
     });
   };
 
