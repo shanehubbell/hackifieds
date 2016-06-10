@@ -86,8 +86,11 @@ const workerJob = () => {
   });
   const processListing = (listingId, callback) => {
     listingsController.getListing(listingId, (err, listing) => {
-      console.log('processed', listing);
-      callback(null);
+      listing.userId = 123;
+      listing.save().then(() => {
+        console.log('processed', listing.userId);
+        callback(null);
+      });
     });
   };
 

@@ -34,7 +34,18 @@ module.exports = {
   getListing: function getListing(listingId, callback) {
     db.Listing.findOne({ where: { listingId } })
       .then((listing) => {
-        callback(null, listing.dataValues);
+        callback(null, listing);
+      })
+      .catch((error) => {
+        callback(error);
+      });
+  },
+  updateListing: function updateListing(listingId, lat, lng, distanceToHackReactor, callback) {
+    db.Listing.update(
+      { lat, lng, distanceToHackReactor },
+      { where: { listingId } })
+      .then((result) => {
+        callback(null, result);
       })
       .catch((error) => {
         callback(error);
