@@ -12,7 +12,7 @@ class ListingViewContainer extends Component {
   render() {
     return (
       <p>
-        This is loading 
+        This is loading a
       </p>
     );
   }
