@@ -11,7 +11,7 @@ class ListingViewContainer extends Component {
 // single listing
   render() {
     return (
-      <ListingDetail {this.props.listings[this.props.params.id]} />
+      <ListingDetail listing={this.props.listings[this.props.params.id]} />
     );
   }
 }
@@ -19,7 +19,7 @@ class ListingViewContainer extends Component {
 // mapping state to props, grabbing the listings
 const mapStateToProps = function mapStateToProps(state) {
   return {
-    listings: state.listings,  
+    listings: state.listings,
   };
 };
 
