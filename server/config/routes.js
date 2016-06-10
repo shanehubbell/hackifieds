@@ -14,6 +14,14 @@ function ensureAuthenticated(req, res, next) {
   return res.redirect('/');
 }
 
+function onSuccess(req, res, next) {
+  if (req.session.isLoggedIn) {
+    res.json(true);
+  } else {
+    res.redirect('/');
+  }
+}
+
 module.exports = (app) => {
   app.get('/auth/github',
   passport.authenticate('github', { scope: ['repo'] }));
@@ -21,7 +29,8 @@ module.exports = (app) => {
   app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     (req, res) => {
-      // Successful authentication, redirect home.
+      req.session.isLoggedIn = true;
+      req.session.save();
       console.log('success');
       res.redirect('/');
     });
@@ -31,12 +40,17 @@ module.exports = (app) => {
   app.post('/api/listings', ensureAuthenticated, listingsController.addListing);
   app.get('/api/listings', ensureAuthenticated, listingsController.getListings);
 
+  app.get('/checklogin', ensureAuthenticated, onSuccess);
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve('client/index.html'));
+  });
+
   app.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
   });
 
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve('client/index.html'));
-  });
+  // Catch all, work
+  app.get('/*', ensureAuthenticated, listingsController.getListings);
 };

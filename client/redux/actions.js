@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
 const actions = {
-  addListing(posting) {
+  setAuthentication(isAuthenticate) {
     return {
-      type: 'ADD_LISTING',
-      posting,
+      type: 'AUTHENTICATE',
+      isAuthenticate,
     };
   },
 

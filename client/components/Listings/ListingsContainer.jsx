@@ -37,6 +37,7 @@ const mapStateToProps = function mapStateToProps(state) {
   return {
     listings: state.listings,
     filteredListings: state.filteredListings,
+    isAuthenticated: state.isAuthenticated,
   };
 };
 
