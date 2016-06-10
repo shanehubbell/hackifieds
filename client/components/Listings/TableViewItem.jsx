@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const TableViewItem = (props) => {
   const listing = props.listing; // All data associated with listing

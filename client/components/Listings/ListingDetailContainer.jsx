@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ListingDetail from './ListingDetail.jsx';
 import { connect } from 'react-redux';
 
-class ListingViewContainer extends Component {
+class ListingDetailContainer extends Component {
 
   componentWillMount() {
   }
@@ -11,9 +11,7 @@ class ListingViewContainer extends Component {
 // single listing
   render() {
     return (
-      <p>
-        This is loading a
-      </p>
+      <p>hello</p>
     );
   }
 }
@@ -26,11 +24,11 @@ const mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-ListingViewContainer.propTypes = {
+ListingDetailContainer.propTypes = {
   listings: React.PropTypes.object,
   params: React.PropTypes.object,
 };
 
 // May need to add a dispatch, if we want to have
 // a contact owner action
-export default connect(mapStateToProps)(ListingViewContainer);
+export default connect(mapStateToProps)(ListingDetailContainer);
