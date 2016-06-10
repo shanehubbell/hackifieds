@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const path = require('path');
-const Strategy = require('passport-github').Strategy;
+const Strategy = require('passport-github2').Strategy;
 const github = require('../auth/keys.js');
 
 // auth
