@@ -15,6 +15,9 @@ const Nav = () => (
           <li className="pure-menu-item">
             <Link className="pure-menu-link" to="/add-listing"> Post a Listing</Link>
           </li>
+          <li className="pure-menu-item">
+            <a className="pure-menu-link" href="/auth/github"> Github </a>
+          </li>
         </ul>
       </nav>
     </div>

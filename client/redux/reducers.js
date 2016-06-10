@@ -17,8 +17,7 @@ const listingsReducer = (state = {}, action) => {
 const filteredListingsReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_FILTERED_LISTINGS':
-      console.log('REDUCER--->', action.filteredListings);
-      return Object.assign({}, state, action.filteredListings);
+      return Object.assign({}, action.filteredListings);
 
     default:
       return state;
