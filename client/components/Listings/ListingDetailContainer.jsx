@@ -11,16 +11,24 @@ class ListingViewContainer extends Component {
 // single listing
   render() {
     return (
-      <ListingDetail listing={this.props.listings[this.props.params.id]} />
+      <p>
+        This is loading 
+      </p>
     );
   }
 }
+      // <ListingDetail listing={this.props.listings[this.props.params.id]} />
 
 // mapping state to props, grabbing the listings
 const mapStateToProps = function mapStateToProps(state) {
   return {
     listings: state.listings,
   };
+};
+
+ListingViewContainer.propTypes = {
+  listings: React.PropTypes.object,
+  params: React.PropTypes.object,
 };
 
 // May need to add a dispatch, if we want to have

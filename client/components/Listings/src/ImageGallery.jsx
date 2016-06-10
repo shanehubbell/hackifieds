@@ -1,5 +1,5 @@
 import React from 'react'
-import Swipeable from 'react-swipeable'
+import Swipeable from './Swipeable.js'
 
 const MIN_INTERVAL = 500
 
