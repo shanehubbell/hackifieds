@@ -14,14 +14,12 @@ class ListingsContainer extends Component {
   getListings() {
     api.getListings()
       .then(response => {
-        console.log('Here is the listings from the axios api call', response.data);
         store.dispatch(actions.setListings(response.data));
         store.dispatch(actions.setFilteredListings(response.data));
       });
   }
 
   render() {
-    console.log('LISTINGS CONTAINER===>', this.props.listings);
     return (
       <Listings {...this.props} />
     );

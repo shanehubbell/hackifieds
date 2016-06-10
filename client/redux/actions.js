@@ -25,6 +25,7 @@ const actions = {
   },
 
   updateFilteredListings(options, listings) {
+    console.log('inside update filter == options', options);
     // filter all the listings based on options
     const filteredListings = _.reduce(listings, (acc, curr, key) => {
       const newListings = acc;
@@ -34,7 +35,7 @@ const actions = {
       }
       return newListings;
     }, {});
-
+    console.log('filtered listings after update', filteredListings);
     return {
       type: 'SET_FILTERED_LISTINGS',
       filteredListings,
