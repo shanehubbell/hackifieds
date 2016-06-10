@@ -7,6 +7,7 @@ import reducers from './reducers';
 const initialState = {
   listings: {},
   filteredListings: {},
+  isAuthenticated: false,
 };
 
 const store = createStore(reducers, initialState);
