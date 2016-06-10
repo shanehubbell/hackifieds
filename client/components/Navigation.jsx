@@ -18,6 +18,9 @@ const Navigation = () => (
           <li className="pure-menu-item">
             <a className="pure-menu-link" href="/auth/github"> Github </a>
           </li>
+          <li className="pure-menu-item">
+            <a className="pure-menu-link" href="/logout"> Logout </a>
+          </li>
         </ul>
       </nav>
     </div>
