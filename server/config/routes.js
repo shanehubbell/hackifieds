@@ -61,7 +61,7 @@ module.exports = (app) => {
 
   app.get('/', (req, res) => {
     console.log(process.pid + 'served u the index');
-    process.send({ img: 'gucci.jpg' });
+    process.send({ listingId: 5 });
     res.sendFile(path.resolve('client/index.html'));
   });
 };
