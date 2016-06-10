@@ -4,6 +4,8 @@ const children = {};
 const Queue = require('./queueStack').Queue;
 const listingQueue = new Queue();
 
+const listingsController = require('./controllers/listingsController.js');
+
 const log = (p, msg) => {
   var name;
   var pid;
@@ -82,10 +84,11 @@ const workerJob = () => {
   process.on('message', (listing) => {
     listingQueue.enqueue(listing);
   });
-  const processListing = (listing, callback) => {
-    
-    console.log('processed', listing);
-    callback(null);
+  const processListing = (listingId, callback) => {
+    listingsController.getListing(listingId, (err, listing) => {
+      console.log('processed', listing);
+      callback(null);
+    });
   };
 
   const workerLoop = () => {
@@ -97,6 +100,8 @@ const workerJob = () => {
       processListing(listing, (err) => {
         if (!err) {
           process.send({ msg: 'success listing processed' });
+        } else {
+          listingQueue.enqueue(listing);
         }
         // keep processing listings
         setTimeout(workerLoop, 1000);
