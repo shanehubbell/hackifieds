@@ -14,7 +14,7 @@
   line-height: 1.7em;
   color: #7f8c8d;
   font-size: 13px;
-  font-family: Alegreya;
+  font-family: 'Alegreya Sans', sans-serif;
 }
 
 h1,
@@ -25,6 +25,7 @@ h5,
 h6,
 label {
   color: #34495e;
+  font-family: 'Alegreya Sans', sans-serif;
 }
 
 .pure-img-responsive {
