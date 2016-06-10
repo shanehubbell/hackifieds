@@ -78,7 +78,6 @@ const httpJob = () => {
 };
 
 const imageWorkerJob = () => {
-
   // listen for new image names that need to be processed from the http server
   process.on('message', (msg) => {
     pictureProcessQueue.enqueue(msg);
