@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const actions = {
   addListing(posting) {
     return {
@@ -5,6 +7,7 @@ const actions = {
       posting,
     };
   },
+
   setListings(listings) {
     console.log('HEre is the listings inside of actions', listings);
     return {
@@ -12,8 +15,26 @@ const actions = {
       listings,
     };
   },
+
   setFilteredListings(filteredListings) {
     console.log('HEre is the filtered listings inside of actions', filteredListings);
+    return {
+      type: 'SET_FILTERED_LISTINGS',
+      filteredListings,
+    };
+  },
+
+  updateFilteredListings(options, listings) {
+    // filter all the listings based on options
+    const filteredListings = _.reduce(listings, (acc, curr, key) => {
+      const newListings = acc;
+      if (curr.private === options.private &&
+        curr.price <= options.price) {
+        newListings[key] = curr;
+      }
+      return newListings;
+    }, {});
+
     return {
       type: 'SET_FILTERED_LISTINGS',
       filteredListings,
