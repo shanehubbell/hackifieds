@@ -4,7 +4,6 @@ import TableViewContainer from './TableViewContainer.jsx';
 
 const Listings = (props) => (
   <div className="listings">
-    <h1>Listings</h1>
     <FilterContainer />
     <TableViewContainer />
   </div>

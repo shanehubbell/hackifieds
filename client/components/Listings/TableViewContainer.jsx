@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 class TableViewContainer extends Component {
 
   componentWillMount() {
-
   }
 
   render() {

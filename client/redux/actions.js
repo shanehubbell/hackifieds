@@ -9,7 +9,7 @@ const actions = {
   },
 
   setListings(listings) {
-    console.log('HEre is the listings inside of actions', listings);
+    // console.log('actions.js setListings() ==>', listings);
     return {
       type: 'SET_LISTINGS',
       listings,
@@ -17,7 +17,7 @@ const actions = {
   },
 
   setFilteredListings(filteredListings) {
-    console.log('HEre is the filtered listings inside of actions', filteredListings);
+    // console.log('actions.js setFilteredListings() ==>', filteredListings);
     return {
       type: 'SET_FILTERED_LISTINGS',
       filteredListings,
