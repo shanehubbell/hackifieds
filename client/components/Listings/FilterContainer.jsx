@@ -70,5 +70,9 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
+FilterContainer.propTypes = {
+  updateFilter: React.PropTypes.func,
+  listings: React.PropTypes.object,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterContainer);
