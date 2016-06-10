@@ -19,13 +19,12 @@ class FilterContainer extends Component {
   handlePrivateChange(e) {
     this.setState({
       options: {
-        private: e.target.value,
+        private: e.target.checked,
         price: this.state.options.price,
       },
     });
+
     this.props.updateFilter(this.state.options, this.props.listings);
-    console.log('heres filtered data...', this.props.filteredListings);
-    console.log('GET STORE-->', store.getState());
   }
 
   render() {

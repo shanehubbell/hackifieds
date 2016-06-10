@@ -25,9 +25,8 @@ const actions = {
   },
 
   updateFilteredListings(options, listings) {
-    console.log('inside update filter == options', options);
     // filter all the listings based on options
-    const filteredListings = _.reduce(listings, (acc, curr, key) => {
+    let filteredListings = _.reduce(listings, (acc, curr, key) => {
       const newListings = acc;
       if (curr.private === options.private &&
         curr.price <= options.price) {
@@ -35,7 +34,9 @@ const actions = {
       }
       return newListings;
     }, {});
-    console.log('filtered listings after update', filteredListings);
+
+    // filteredListings = Object.keys(filteredListings).length ? filteredListings : listings;
+
     return {
       type: 'SET_FILTERED_LISTINGS',
       filteredListings,
