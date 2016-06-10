@@ -1,22 +1,26 @@
+// Required modules for react/redux/router
 import React, { Component } from 'react';
-import Home from './Home.jsx';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+
+// Redux store files
 import store from '../redux/store';
 import actions from '../redux/actions';
+
+// Helper api functions
 import api from '../api.js';
-// import { setListings } from '../api/listings';
+
+// Component to render
+import Home from './Home.jsx';
+
 class HomeContainer extends Component {
 
   componentWillMount() {
-    this.login();
-  }
-
-  login() {
-    api.login()
+    api.getLoginStatus()
       .then(response => {
-        console.log('Reponse.data ==>', response.data);
         if (response.data === true) {
           store.dispatch(actions.setAuthentication(true));
+          browserHistory.push('/listings');
         }
       });
   }

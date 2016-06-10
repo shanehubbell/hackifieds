@@ -10,12 +10,13 @@ const upload = multer({ dest: 'dist/images/' });
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  console.log('access denied');
+  console.log('User is not authenticated. Redirect to splash');
   return res.redirect('/');
 }
 
-function onSuccess(req, res, next) {
+function checkLoginHandler(req, res, next) {
   if (req.session.isLoggedIn) {
+    // Send back this response so client and use it to update state
     res.json(true);
   } else {
     res.redirect('/');
@@ -29,9 +30,11 @@ module.exports = (app) => {
   app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     (req, res) => {
+      console.log('User successfully authenticated with Github.');
+      // On success, attach the logged in status to session for the duration
+      // of the session. Will be used to set the state on the front end
       req.session.isLoggedIn = true;
       req.session.save();
-      console.log('success');
       res.redirect('/');
     });
 
@@ -40,7 +43,7 @@ module.exports = (app) => {
   app.post('/api/listings', ensureAuthenticated, listingsController.addListing);
   app.get('/api/listings', ensureAuthenticated, listingsController.getListings);
 
-  app.get('/checklogin', ensureAuthenticated, onSuccess);
+  app.get('/checklogin', ensureAuthenticated, checkLoginHandler);
 
   app.get('/', (req, res) => {
     res.sendFile(path.resolve('client/index.html'));
@@ -51,6 +54,8 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  // Catch all, work
-  app.get('/*', ensureAuthenticated, listingsController.getListings);
+  // Catch all;
+  app.get('/*', (req, res) => {
+    res.redirect('/');
+  });
 };
