@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import store from '../../redux/store';
 import actions from '../../redux/actions';
 import api from '../../api.js';
-
+import _ from 'lodash';
+// import { setListings } from '../api/listings';
 class ListingsContainer extends Component {
 
   componentWillMount() {
@@ -14,6 +15,12 @@ class ListingsContainer extends Component {
   getListings() {
     api.getListings()
       .then(response => {
+        _.each(response.data, (item) => {
+          const listing = item;
+          // Converts the pictures array (currently stringified) back into an array
+          listing.pictures = JSON.parse(listing.pictures);
+        });
+
         store.dispatch(actions.setListings(response.data));
         store.dispatch(actions.setFilteredListings(response.data));
       });
