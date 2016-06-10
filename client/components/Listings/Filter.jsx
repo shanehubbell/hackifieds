@@ -1,27 +1,30 @@
 import React from 'react';
 
-class Filter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const Filter = (props) => (
+  <div>
+    <h2>Filtering options here....</h2>
+    <form onChange={props.handleFormChange}>
+      <label>Private</label>
+      <input
+        type="checkbox" name="private" onChange={props.handlePrivateChange}
+        value={props.options.private}
+      />
+      <label>Price</label>
+      <input
+        type="text" name="price" onChange={props.handlePriceChange}
+        value={props.options.price}
+      />
+    </form>
+  </div>
+);
 
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Filtering options here....</h2>
-        <form>
-          <label>Private</label>
-          <input
-            type="checkbox" name="private" onChange={this.props.handlePrivateChange}
-            value={this.props.options.private}
-          />
-        </form>
-      </div>
-    );
-  }
-}
+Filter.propTypes = {
+  options: React.PropTypes.object,
+  private: React.PropTypes.bool,
+  price: React.PropTypes.string,
+  handlePrivateChange: React.PropTypes.func,
+  handlePriceChange: React.PropTypes.func,
+  handleFormChange: React.PropTypes.func,
+};
 
 export default Filter;
