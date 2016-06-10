@@ -16,6 +16,7 @@ const router = (
       <Route path="/" component={AppContainer} >
         <Route path="/listings" component={ListingsContainer} />
         <Route path="/add-listing" component={AddListing} />
+        <Route path="/listing-detail" component={ListingDetail} />
       </Route>
     </Router>
   </Provider>
