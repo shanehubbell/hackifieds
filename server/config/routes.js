@@ -1,9 +1,8 @@
+const passport = require('passport');
 const path = require('path');
 
-const passport = require('passport');
-
-const imagesController = require('../images/imagesController.js');
 const listingsController = require('../controllers/listingsController.js');
+const imageController = require('../controllers/imageController.js');
 
 const multer = require('multer');
 const upload = multer({ dest: 'dist/images/' });
@@ -38,7 +37,7 @@ module.exports = (app) => {
       res.redirect('/');
     });
 
-  app.post('/api/images', ensureAuthenticated, upload.single('file'), imagesController.addImage);
+  app.post('/api/images', ensureAuthenticated, upload.single('file'), imageController.postImage);
 
   app.post('/api/listings', ensureAuthenticated, listingsController.addListing);
   app.get('/api/listings', ensureAuthenticated, listingsController.getListings);
@@ -59,9 +58,10 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
+  app.get('/compressed/*', imageController.getImage);
+
   app.get('/', (req, res) => {
     console.log(process.pid + 'served u the index');
-    process.send({ listingId: 6 });
     res.sendFile(path.resolve('client/index.html'));
   });
 };
