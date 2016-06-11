@@ -3,8 +3,8 @@ const cluster = require('cluster');
 const children = {};
 
 // db controllers
-const listingsController = require('./controllers/listingsController.js');
-const imageController = require('./controllers/imageController.js');
+const listingsController = require('../controllers/listingsController.js');
+const imageController = require('../controllers/imageController.js');
 
 const GoogleMapsAPI = require('googlemaps');
 const distance = require('google-distance-matrix');
@@ -15,7 +15,7 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
 
 // auth keys
-const keys = require('./auth/keys.js');
+const keys = require('../auth/keys.js');
 
 // console.log helper
 const log = (p, msg) => {
@@ -89,7 +89,7 @@ const masterJob = () => {
 };
 
 const httpJob = () => {
-  require('./server.js');
+  require('../server.js');
 };
 
 const updateListing = (listingId, lat, lng, distanceToHackReactor) => {
@@ -157,7 +157,7 @@ const processImages = (pictures, done) => {
   console.log('pictures!!', pictures);
   for (var i = 0; i < pictures.length; i++) {
     var picId = pictures[i];
-    imagemin(['dist/images/' + picId], 'dist/compressed',
+    imagemin(['../dist/images/' + picId], '../dist/compressed',
     { plugins: [imageminMozjpeg({ quality: 90 }),
     imageminPngquant({ quality: '65-80' })] })
     .then((files) => {
