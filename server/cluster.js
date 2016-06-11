@@ -5,8 +5,12 @@ const Queue = require('./queueStack').Queue;
 const listingQueue = new Queue();
 
 const listingsController = require('./controllers/listingsController.js');
+const imageController = require('./controllers/imageController.js');
+
 const GoogleMapsAPI = require('googlemaps');
 const distance = require('google-distance-matrix');
+
+const imagemin = require('imagemin');
 
 const keys = require('./auth/keys.js');
 
@@ -84,8 +88,20 @@ const httpJob = () => {
   require('./server.js');
 };
 
+const updateListing = (listingId, lat, lng, distanceToHackReactor) => {
+  listingsController.updateListing(listingId, lat, lng,
+    JSON.stringify(distanceToHackReactor), (err) => {
+      if (!err) {
+        console.log('gmap done');
+      }
+    });
+};
+
 const gmap = (listingId, address, done) => {
-  address = 'greenhaven mukilteo, WA';
+  var lat;
+  var lng;
+  var distanceToHackReactor;
+  var tasks = 2;
   distance.key = keys.GMAP_SECRET;
   distance.units('imperial');
 
@@ -97,30 +113,45 @@ const gmap = (listingId, address, done) => {
   const gmapAPI = new GoogleMapsAPI(publicConfig);
 
   gmapAPI.geocode({ address }, (err, data) => {
-    const lat = data.results[0].geometry.location.lat;
-    const lng = data.results[0].geometry.location.lng;
+    lat = data.results[0].geometry.location.lat;
+    lng = data.results[0].geometry.location.lng;
     console.log('gmap', lat, lng);
+    if (--tasks === 0) {
+      updateListing(listingId, lat, lng, distanceToHackReactor);
+      done();
+    }
   });
 
   distance.matrix([address], ['8, 944 Market St, San Francisco, CA 94102'],
     (err, data) => {
-      const distanceToHackReactor = {
+      distanceToHackReactor = {
         miles: data.rows[0].elements[0].distance.text,
         time: data.rows[0].elements[0].duration.text,
       };
       console.log('distance: ', distanceToHackReactor);
+      if (--tasks === 0) {
+        updateListing(listingId, lat, lng, distanceToHackReactor);
+        done();
+      }
     });
-
-  listingsController.updateListing(listingId, 101, 102, 55, (err) => {
-    if (!err) {
-      console.log('gmap done');
-    }
-    done();
-  });
 };
 
 const img = (pictures, done) => {
-  console.log(pictures);
+  console.log('pictures!!', pictures);
+  for (var i = 0; i < pictures.length; i++) {
+    var picId = pictures[i];
+    imagemin(['dist/images/' + pictures[i]], null)
+    .then((files) => {
+      console.log(files);
+      imageController.addImage(picId, files[0].data, (err, res) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log(res);
+      });
+      //=> [{data: <Buffer 89 50 4e …>, path: 'build/images/foo.jpg'}, …]
+    });
+  }
   done();
 };
 
