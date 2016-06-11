@@ -112,7 +112,8 @@ if (cluster.isMaster) {
     const worker = require('./worker.js');
     worker.workerJob();
   } else if (process.env.ROLE === 'email') {
-    
+    const email = require('./email.js');
+    email.emailJob();
   } else {
     httpJob();
   }
