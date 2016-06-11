@@ -16,7 +16,7 @@ module.exports = {
     console.log('asking for image', req.params[0]);
     mongodb.Image.findById(req.params[0], (err, doc) => {
       if (err || doc === undefined || doc === null) {
-        res.end(JSON.stringify(err));
+        res.status(404).send('Not found');
       } else {
         res.end(doc.data);
       }
