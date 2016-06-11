@@ -7,20 +7,20 @@ const sendEmail = (props) => (
 
 const ListingDetail = (props) => (
   <div>
-    <div id="container "className="photobanner pure-g">
+    <div id="container "className="photobanner">
         {props.listing.pictures.map((image, index) => (
           index === 0 ? 
           <img
             src={'/images/'+image}
             key={index}
             alt
-            className="first img-resize  u-med-1-2 u-lrg-1-3"
+            className="first img-resize"
           /> : 
           <img
             src={'/images/'+image}
             key={index}
             alt
-            className="img-resize  u-med-1-2 u-lrg-1-3"
+            className="img-resize"
           />
           ))
         }
@@ -29,7 +29,7 @@ const ListingDetail = (props) => (
             src={'/images/'+image}
             key={index}
             alt
-            className="img-resize  u-med-1-2 u-lrg-1-3"
+            className="img-resize"
           />
           ))
         }
