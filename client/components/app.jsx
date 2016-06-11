@@ -4,7 +4,7 @@ import Home from './HomeContainer.jsx';
 
 const App = (props) => (
   <div className="header pure-menu-heading">
-    <Navigation />
+    <Navigation auth={props} />
     {props.isAuthenticated ?
       <main>
         {props.children}
@@ -15,6 +15,7 @@ const App = (props) => (
 
 App.propTypes = {
   children: React.PropTypes.object,
+  isAuthenticated: React.PropTypes.bool,
 };
 
 export default App;

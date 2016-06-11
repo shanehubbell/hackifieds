@@ -11,7 +11,7 @@ const TableViewItem = (props) => {
   return (
     <div className="pure-g tableViewItem" key={listing.listingId} onClick={props.onClick}>
       <div className="pure-g">
-        <img className="table-image pure-u-1-3" alt="" src={`images/${listing.pictures[0]}`} />
+        <img className="table-image pure-u-1-3 pure-img" alt="" src={`images/${listing.pictures[0]}`} />
       </div>
       <div className="pure-g">
         <div className="icons pure-u-1-3">

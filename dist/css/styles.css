@@ -4,6 +4,8 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  text-transform: none !important;
+  font-family: 'Alegreya Sans', sans-serif;
 }
 
 /*
@@ -11,10 +13,9 @@
  * Most of these are inherited from Base, but I want to change a few.
  */
  body {
-  line-height: 1.7em;
+  line-height: 1.5em;
   color: #7f8c8d;
   font-size: 13px;
-  margin: 0;
 }
 
 h1,
@@ -38,35 +39,6 @@ label {
  */
  .l-box {
   padding: 1em;
-}
-
-.l-box-lrg {
-  padding: 2em;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.is-center {
-  text-align: center;
-}
-
-
-
-/*
- * -- PURE FORM STYLES --
- * Style the form inputs and labels
- */
- .pure-form label {
-  margin: 1em 0 0;
-  font-weight: bold;
-  font-size: 100%;
-}
-
-.pure-form input[type] {
-  border: 2px solid #ddd;
-  box-shadow: none;
-  font-size: 100%;
-  width: 100%;
-  margin-bottom: 1em;
 }
 
 /*
@@ -94,12 +66,12 @@ a.pure-button-primary {
  */
 
  .home-menu {
-  padding: 0.5em;
+  padding: 0.2em;
   text-align: center;
   box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
 }
 .home-menu {
-  background: #2d3e50;
+  background: #2c3e50;
 }
 .pure-menu.pure-menu-fixed {
   /* Fixed menus normally have a border at the bottom. */
@@ -119,7 +91,8 @@ a.pure-button-primary {
 }
 
 .home-menu a {
-  color: #6FBEF3;
+  color: #ecf0f1;
+  font-size: 1.4em;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
@@ -135,15 +108,15 @@ a.pure-button-primary {
  */
 
  .splash-container {
-  background: #1f8dd6;
-  z-index: 1;
-  overflow: hidden;
+  /*background-color: #1f8dd6;*/
+  /*z-index: 1;*/
+  /*overflow: hidden;*/
   /* The following styles are required for the "scroll-over" effect */
   width: 100%;
   height: 88%;
   top: 0;
   left: 0;
-  position: fixed !important;
+  /*position: fixed !important;*/
 }
 
 .splash {
@@ -187,7 +160,6 @@ a.pure-button-primary {
   min-height: 12%;
   z-index: 2;
   background: white;
-
 }
 
 /* This is the class used for the main content headers (<h2>) */
@@ -307,8 +279,17 @@ a.pure-button-primary {
   font-size: 1.5em;
   padding: 10px;
 }
+
 p {
   margin: 15px;
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap;     /* Opera <7 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
+  text-align: center;
+  font-family: Verdana;
+  font-size: 1.1em;
 }
 
 .filterBox {
@@ -319,8 +300,24 @@ p {
   background-color: white;
   padding: 1em;
 }
-* {
-  text-transform: none !important;
-  font-family: 'Alegreya Sans', sans-serif;
+
+#splashimage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 90%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+}
+
+.is-center {
+  text-align: center;
 }
 
