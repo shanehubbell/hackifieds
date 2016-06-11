@@ -5,6 +5,7 @@ import { render } from 'react-dom';
 import AppContainer from './components/AppContainer.jsx';
 import ListingsContainer from './components/Listings/ListingsContainer.jsx';
 import AddListing from './components/AddListing.jsx';
+import ListingDetailContainer from './components/Listings/ListingDetailContainer.jsx';
 
 import { Router, Route } from 'react-router';
 import store, { history } from './redux/store';
@@ -15,6 +16,7 @@ const router = (
       <Route path="/" component={AppContainer} >
         <Route path="/listings" component={ListingsContainer} />
         <Route path="/add-listing" component={AddListing} />
+        <Route path="/listing-detail/:id" component={ListingDetailContainer} />
       </Route>
     </Router>
   </Provider>
