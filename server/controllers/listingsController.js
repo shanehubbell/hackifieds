@@ -5,10 +5,9 @@ module.exports = {
     // req.user.id
     sqldb.Listing.findAll({ where: {} })
     .then((listings) => {
-      const response = listings.reduce((accu, curr, index) => {
-        const obj = accu;
-        obj[index + 1] = curr;
-        return accu;
+      const response = listings.reduce((accumulator, current) => {
+        accumulator[current.listingId] = current;
+        return accumulator;
       }, {});
       res.end(JSON.stringify(response));
     })
