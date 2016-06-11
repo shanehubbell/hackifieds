@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/base-min.css">
   <link rel="stylesheet" href="css/styles.css">
   <title>HackBnB</title>
+  <script src="auth/keys.js"></script>
+  <script type="text/javascript">
+    var apiSrc = 'https://maps.googleapis.com/maps/api/js?key=' + window.GMAP_SECRET;
+    document.write('<script type="text/javascript" src="' + apiSrc + '"></scr' + 'ipt>');
+  </script>
 </head>
 <body>
   <div id="app"></div>

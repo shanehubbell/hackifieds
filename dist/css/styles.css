@@ -259,6 +259,21 @@ a.pure-button-primary {
   margin-top: 80px;
 }
 
+.mapsContainer {
+  border: 2px solid #D6EAF8;
+  background-color: #F8F9F9;
+  display: inline-block;
+  width: 67%;
+  height: 100%;
+  position: absolute;
+}
+
+.sideBarContainer {
+  display: inline-block;
+  width: 33%;
+  float: right;
+}
+
 #splashimage {
   position: fixed;
   top: 50%;
@@ -297,6 +312,7 @@ a.pure-button-primary {
 .tableView {
   border: 2px solid #D6EAF8;
   background-color: #F8F9F9;
+  display: inline-block;
 }
 
 .table-image {
