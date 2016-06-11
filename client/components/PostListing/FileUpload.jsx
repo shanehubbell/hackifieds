@@ -2,7 +2,6 @@ const React = require('react');
 // const Dropzone = require('react-dropzone');
 // const request = require('superagent');
 
-
 class FileUpload extends React.Component {
   constructor() {
     super();
