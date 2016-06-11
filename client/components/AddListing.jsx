@@ -110,7 +110,6 @@ class AddListing extends React.Component {
           />
           <button
             onClick={this.handleSubmitForm}
-            type="submit"
             className="pure-button pure-button-primary"
           >Submit</button>
         </fieldset>

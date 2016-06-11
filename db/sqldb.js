@@ -15,7 +15,7 @@ const Listing = db.define('Listing', {
   private: { type: Sequelize.BOOLEAN },
   ownerName: { type: Sequelize.STRING },
   ownerEmail: { type: Sequelize.STRING },
-  pictures: { type: Sequelize.STRING },
+  pictures: { type: Sequelize.TEXT },
   description: { type: Sequelize.TEXT },
 }, {
   timestamps: false,
@@ -24,4 +24,4 @@ const Listing = db.define('Listing', {
 db.sync().then(() => console.log('done creating tables'))
   .catch((err) => console.log('error syncing database ==>', err));
 
-exports.Listing = Listing;
+module.exports.Listing = Listing;
