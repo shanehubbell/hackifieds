@@ -7,43 +7,43 @@ const sendEmail = (props) => (
 
 const ListingDetail = (props) => (
   <div>
-    <div className="pure-g">
-      {console.log('Props inside of ListingDetail ==>', props)}
-        <p>Pictures</p>
+    <div id="container "className="photobanner pure-g">
+        {props.listing.pictures.map((image, index) => (
+          index === 0 ? 
+          <img
+            src={'/images/'+image}
+            key={index}
+            alt
+            className="first img-resize  u-med-1-2 u-lrg-1-3"
+          /> : 
+          <img
+            src={'/images/'+image}
+            key={index}
+            alt
+            className="img-resize  u-med-1-2 u-lrg-1-3"
+          />
+          ))
+        }
         {props.listing.pictures.map((image, index) => (
           <img
             src={'/images/'+image}
             key={index}
-            className="table-image pure-img photo-box u-1 u-med-1-2 u-lrg-1-3"
             alt
+            className="img-resize  u-med-1-2 u-lrg-1-3"
           />
           ))
         }
         <br/>
     </div>
-    <div className="pure-g">
-      <div className="pure-u-1 pure-u-md-1-2">
-        <h1>Description: {props.listing.description}</h1>
-      </div>
-      <div className="pure-u-1 pure-u-md-1-2">
-        <h2>Address: {props.listing.address}</h2>
-      </div>
-      <div className="pure-u-1 pure-u-md-1-2">
-        <p>Bathrooms: {props.listing.bathrooms}</p>
-      </div>
-      <div className="pure-u-1 pure-u-md-1-2">
-        <p>Distance from HR: {props.listing.distanceFromHR}</p>
-      </div>
-    </div>
-    <div className="pure-u-1 pure-u-md-1-2">
-      <p>Owner: {props.listing.ownerName}</p>
-    </div>
-    <div className="pure-u-1 pure-u-md-1-2">
+      <h1>{props.listing.description}</h1>
+      <h2>{props.listing.address}</h2>
+      <p>Bathrooms: {props.listing.bathrooms}</p>
+      <p>{props.listing.distanceFromHR} miles from Hack Reactor!</p>
+      <p>Host: {props.listing.ownerName}</p>
       <Link to={`mailto:${props.listing.ownerEmail}`}>
         <button>Request to Book!
         </button>
       </Link>
-    </div>
   </div>
 );
 
