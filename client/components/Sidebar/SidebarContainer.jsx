@@ -1,9 +1,9 @@
 import React from 'react';
-import TableView from './TableView.jsx';
+import Sidebar from './Sidebar.jsx';
 import { connect } from 'react-redux';
 
-const TableViewContainer = (props) => (
-  <TableView {...props} />
+const SidebarContainer = (props) => (
+  <Sidebar {...props} />
 );
 
 const mapStateToProps = function mapStateToProps(state) {
@@ -12,4 +12,4 @@ const mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps)(TableViewContainer);
+export default connect(mapStateToProps)(SidebarContainer);

@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 
 import AppContainer from './components/AppContainer.jsx';
-import ListingsContainer from './components/Listings/ListingsContainer.jsx';
-import AddListing from './components/AddListing.jsx';
+import MainContainer from './components/Main/MainContainer.jsx';
+import PostListingContainer from './components/PostListing/PostListingContainer.jsx';
 import ListingDetailContainer from './components/Listings/ListingDetailContainer.jsx';
 
 import { Router, Route } from 'react-router';
@@ -14,8 +14,8 @@ const router = (
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={AppContainer} >
-        <Route path="/listings" component={ListingsContainer} />
-        <Route path="/add-listing" component={AddListing} />
+        <Route path="/listings" component={MainContainer} />
+        <Route path="/add-listing" component={PostListingContainer} />
         <Route path="/listing-detail/:id" component={ListingDetailContainer} />
       </Route>
     </Router>

@@ -1,6 +1,6 @@
 import React from 'react';
-import Navigation from './Navigation.jsx';
-import Home from './HomeContainer.jsx';
+import Navigation from './Navigation/Navigation.jsx';
+import Home from './Home/HomeContainer.jsx';
 
 const App = (props) => (
   <div className="header pure-menu-heading">

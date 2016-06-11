@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import store from '../redux/store';
-import actions from '../redux/actions';
-import api from '../api.js';
+import store from '../../redux/store';
+import actions from '../../redux/actions';
+import api from '../../api.js';
 import Home from './Home.jsx';
 
 class HomeContainer extends Component {

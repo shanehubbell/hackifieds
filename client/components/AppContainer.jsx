@@ -1,16 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import App from './App.jsx';
 import { connect } from 'react-redux';
-import store from '../redux/store';
-import actions from '../redux/actions';
-// import { setListings } from '../api/listings';
-class AppContainer extends Component {
-  render() {
-    return (
-      <App {...this.props} />
-    );
-  }
-}
+
+const AppContainer = (props) => (
+  <App {...props} />
+);
 
 const mapStateToProps = function mapStateToProps(state) {
   return {

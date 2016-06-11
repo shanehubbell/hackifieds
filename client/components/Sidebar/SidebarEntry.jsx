@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const TableViewItem = (props) => {
+const SidebarEntry = (props) => {
   const listing = props.listing; // All data associated with listing
   const numOfBathrooms = `${listing.bathrooms} bathroom${listing.bathrooms > 1 ? 's' : ''}`;
+  const distance = listing.distanceToHackReactor.miles;
   const privateRoom = {
     fontIcon: `fa fa-user${listing.private ? '' : 's'}`,
     text: `${listing.private ? 'Private' : 'Shared'} Room`,
   };
-
+  console.log(listing, '<=== Listing');
   return (
     <Link to={`/listing-detail/${listing.listingId}`}>
       <div className="pure-g tableViewItem" key={listing.listingId} onClick={props.onClick}>
@@ -21,7 +22,7 @@ const TableViewItem = (props) => {
         <div className="pure-g">
           <div className="icons pure-u-1-3">
             <p><span className="fa fa-usd" aria-hidden="true" />{" "}{listing.price}</p>
-            <p><span className="fa fa-compass" aria-hidden="true" />{" "}5 miles to HR</p>
+            <p><span className="fa fa-compass" aria-hidden="true" />{" "}{distance} to Hack Reactor</p>
             <p><span className="fa fa-map-marker" aria-hidden="true" />{" "}{listing.address}</p>
             <p><span
               className={privateRoom.fontIcon}
@@ -35,9 +36,9 @@ const TableViewItem = (props) => {
   );
 };
 
-TableViewItem.propTypes = {
+SidebarEntry.propTypes = {
   listing: React.PropTypes.object,
   onClick: React.PropTypes.func,
 };
 
-export default TableViewItem;
+export default SidebarEntry;
