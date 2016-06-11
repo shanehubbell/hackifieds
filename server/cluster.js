@@ -11,7 +11,8 @@ const GoogleMapsAPI = require('googlemaps');
 const distance = require('google-distance-matrix');
 
 const imagemin = require('imagemin');
-
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminPngquant = require('imagemin-pngquant');
 const keys = require('./auth/keys.js');
 
 
@@ -140,7 +141,9 @@ const img = (pictures, done) => {
   console.log('pictures!!', pictures);
   for (var i = 0; i < pictures.length; i++) {
     var picId = pictures[i];
-    imagemin(['dist/images/' + pictures[i]], null)
+    imagemin(['dist/images/' + picId], 'dist/compressed',
+    { plugins: [imageminMozjpeg({ quality: 90 }),
+    imageminPngquant({ quality: '65-80' })] })
     .then((files) => {
       console.log(files);
       imageController.addImage(picId, files[0].data, (err, res) => {
@@ -150,6 +153,9 @@ const img = (pictures, done) => {
         console.log(res);
       });
       //=> [{data: <Buffer 89 50 4e …>, path: 'build/images/foo.jpg'}, …]
+    })
+    .catch((err) => {
+      console.log(err);
     });
   }
   done();
