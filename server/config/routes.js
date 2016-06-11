@@ -7,17 +7,17 @@ const listingsController = require('../controllers/listingsController.js');
 const imageController = require('../controllers/imageController.js');
 
 const multer = require('multer');
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+const storage = multer.diskStorage({
+  destination: function destination(req, file, cb) {
     cb(null, 'dist/images/');
   },
-  filename: function (req, file, cb) {
-    crypto.pseudoRandomBytes(16, function (err, raw) {
+  filename: function filename(req, file, cb) {
+    crypto.pseudoRandomBytes(16, (err, raw) => {
       cb(null, raw.toString('hex') + Date.now() + '.' + mime.extension(file.mimetype));
     });
-  }
+  },
 });
-var upload = multer({ storage: storage });
+const upload = multer({ storage });
 // const upload = multer({ dest: 'dist/images/' });
 
 function ensureAuthenticated(req, res, next) {
@@ -57,6 +57,12 @@ module.exports = (app) => {
 
   app.get('/checklogin', ensureAuthenticated, checkLoginHandler);
 
+  app.post('/email', (req, res) => {
+    console.log('email body', req.body);
+    process.send({ email: { to: req.body.to, body: req.body.body } });
+    res.end();
+  });
+
   app.get('/', (req, res) => {
     res.sendFile(path.resolve('client/index.html'));
   });
@@ -71,10 +77,5 @@ module.exports = (app) => {
    // Catch all;
   app.get('/*', (req, res) => {
     res.redirect('/');
-  });
-
-  app.get('/', (req, res) => {
-    console.log(process.pid + 'served u the index');
-    res.sendFile(path.resolve('client/index.html'));
   });
 };
