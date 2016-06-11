@@ -1,11 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Alegreya+Sans);
+@import url(https://fonts.googleapis.com/css?family=Hind:300);
 
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   text-transform: none !important;
-  font-family: 'Alegreya Sans', sans-serif;
+  font-family: 'Hind', sans-serif;
 }
 
 /*
@@ -250,7 +250,7 @@ a.pure-button-primary {
 
 
 .filterBox {
-  border: 2px solid #D6EAF8;
+  border: 1px solid #D6EAF8;
   -webkit-box-shadow: 0 3px 4px 1px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow: 0 3px 4px 1px #ccc;  /* Firefox 3.5 - 3.6 */
   box-shadow: 0 2px 3px 1px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
@@ -260,7 +260,7 @@ a.pure-button-primary {
 }
 
 .mapsContainer {
-  border: 2px solid #D6EAF8;
+  border: 1px solid #D6EAF8;
   background-color: #F8F9F9;
   display: inline-block;
   width: 67%;
@@ -301,35 +301,41 @@ a.pure-button-primary {
   }
 }
 
-.tableViewItem {
-  border: 2px solid #D6EAF8;
-  -webkit-box-shadow: 0 3px 4px 1px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow: 0 3px 4px 1px #ccc;  /* Firefox 3.5 - 3.6 */
-  box-shadow: 0 2px 3px 1px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-  background-color: white;
+.tableView a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: .6s color; 
 }
 
-.tableView {
-  border: 2px solid #D6EAF8;
-  background-color: #F8F9F9;
+.tableView a:hover{
+  color: #95a5a6;
+}
+
+.tableViewItem {
+  border: 1px solid #D6EAF8;
+  -webkit-box-shadow: 0 1px 1px 1px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 0 1px 1px 1px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow: 0 1px 1px 1px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  background-color: white;
+  overflow: auto;
+  padding: 1em;
+  font-size: 0.8em;
+}
+
+.tableViewItemImage img {
+  width: 120px;
+  height: 120px;
+  float: left;
   display: inline-block;
 }
 
-.table-image {
-  width: 240px;
-  height: 210px;
-  float: left;
-  margin: 20px;
-  display: block;
-}
-
-.icons {
-  font-size: 1.5em;
-  padding: 10px;
-}
-
-p {
-  margin: 15px;
+.tableViewItemDetails {
+  border: 1px solid #D6EAF8;
+  background-color: #F8F9F9;
+  height: 120px;
+  display: inline-block;
+  padding: 0.8em;
+  width: 70%;
 }
 
 .content-info {
@@ -343,6 +349,3 @@ p {
   font-size: 1.1em;
 }
 
-.fa {
-  margin-right: 10px;
-}
