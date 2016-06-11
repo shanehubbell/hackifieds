@@ -1,8 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
+import request from 'superagent';
 
-const sendEmail = (props) => (
-  window.location = `mailto:` + $props.listing.ownerEmail
+const handleContact = (props) => (
+  request
+    .post('/email')
+    .type('form')
+    .send({ to: 'shane.hubbell@gmail.com' ,
+      body: 'heeeeyyyy'})
+    .end((err, res) => {
+    })
 );
 
 const ListingDetail = (props) => (
@@ -40,10 +47,23 @@ const ListingDetail = (props) => (
       <p>Bathrooms: {props.listing.bathrooms}</p>
       <p>{props.listing.distanceFromHR} miles from Hack Reactor!</p>
       <p>Host: {props.listing.ownerName}</p>
-      <Link to={`mailto:${props.listing.ownerEmail}`}>
-        <button>Request to Book!
-        </button>
-      </Link>
+      <p>Contact owner:</p>
+      <div className="pure-g">
+        <div className="pure-u-1 pure-u-md-1-3">
+          <input 
+            size="60"
+            placeholder={`Inquiry about ${props.listing.address}`}
+            value={props.message}
+          />
+        </div>
+      </div>
+        <p>
+          <button
+            onClick={handleContact}
+            className="pure-button pure-button-primary">
+            Submit
+          </button>
+        </p>
   </div>
 );
 
@@ -52,3 +72,4 @@ ListingDetail.propTypes = {
 };
 
 export default ListingDetail;
+        // <Input type="text" name="body" value={`Inquiry about ${props.listing.address}`} />
