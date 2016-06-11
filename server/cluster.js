@@ -161,10 +161,13 @@ const img = (pictures, done) => {
   done();
 };
 
+const array = [];
 const workerJob = () => {
   // listen for new listings that need to be processed
   process.on('message', (listing) => {
-    listingQueue.enqueue(listing);
+    console.log('im enqueueing ', listing);
+    array.push(listing);
+    // listingQueue.enqueue(listing);
   });
 
   const processListing = (listingId, callback) => {
@@ -190,16 +193,17 @@ const workerJob = () => {
   };
 
   const workerLoop = () => {
-    if (listingQueue.size() === 0) {
+    if (array.length === 0) {
       setTimeout(workerLoop, 1000);
     } else {
-      const listing = listingQueue.dequeue();
-      process.send({ msg: 'processing listing' });
+      const listing = array.pop();
+      process.send({ msg: 'processing listing', listing });
+
       processListing(listing, (err) => {
         if (!err) {
           process.send({ msg: 'success listing processed' });
         } else {
-          listingQueue.enqueue(listing);
+          array.push(listing);
         }
         // keep processing listings
         setTimeout(workerLoop, 1000);
