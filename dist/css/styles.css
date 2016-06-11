@@ -14,7 +14,6 @@
   line-height: 1.7em;
   color: #7f8c8d;
   font-size: 13px;
-  font-family: 'Alegreya Sans', sans-serif;
   margin: 0;
 }
 
@@ -26,7 +25,6 @@ h5,
 h6,
 label {
   color: #34495e;
-  font-family: 'Alegreya Sans', sans-serif;
 }
 
 .pure-img-responsive {
@@ -313,5 +311,16 @@ p {
   margin: 15px;
 }
 
-
+.filterBox {
+  border: 2px solid #D6EAF8;
+  -webkit-box-shadow: 0 3px 4px 1px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 0 3px 4px 1px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow: 0 2px 3px 1px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  background-color: white;
+  padding: 1em;
+}
+* {
+  text-transform: none !important;
+  font-family: 'Alegreya Sans', sans-serif;
+}
 
