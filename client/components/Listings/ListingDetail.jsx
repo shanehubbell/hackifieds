@@ -29,26 +29,20 @@ const ListingDetail = (props) => (
         <h2>Address: {props.listing.address}</h2>
       </div>
       <div className="pure-u-1 pure-u-md-1-2">
-        <p>Bathrooms: {props.listing.address}</p>
+        <p>Bathrooms: {props.listing.bathrooms}</p>
       </div>
       <div className="pure-u-1 pure-u-md-1-2">
         <p>Distance from HR: {props.listing.distanceFromHR}</p>
       </div>
     </div>
-    <div className="pure-g">
-      <div className="pure-u-1 pure-u-md-1-2">
-        <p>Owner: {props.listing.ownerName}</p>
-      </div>
-      <div className="pure-u-1 pure-u-md-1-2">
-        <Link 
-          title={`Inquiry for  ${props.listing.address}`} 
-          href={`mailto:${props.listing.ownerEmail}?
-          subject=Renting%20Inquiry%20${props.listing.address}&amp;body=I'm%20interested%20in%20renting!`}
-        >
-          <button>Request to Book!
-          </button>
-        </Link>
-      </div>
+    <div className="pure-u-1 pure-u-md-1-2">
+      <p>Owner: {props.listing.ownerName}</p>
+    </div>
+    <div className="pure-u-1 pure-u-md-1-2">
+      <Link to={`mailto:${props.listing.ownerEmail}`}>
+        <button>Request to Book!
+        </button>
+      </Link>
     </div>
   </div>
 );
@@ -58,11 +52,3 @@ ListingDetail.propTypes = {
 };
 
 export default ListingDetail;
-
-// href="mailto:?subject=Interesting%20information&amp;body=I thought you might find this 
-// information interesting:%20%0d%0ahttp://www.a.com/Home/SiteMap/tabid/589/Default.aspx">
-
-// ASD
-//         <Link to={`mailto:${props.listing.ownerEmail}`}>
-//         </Link>
-// ASD
