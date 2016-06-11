@@ -41,7 +41,6 @@ class Maps extends Component {
   }
 
   renderInfoWindow(ref, marker) {
-    const numOfBathrooms = `${marker.bathrooms} bathroom${marker.bathrooms > 1 ? 's' : ''}`;
     const distance = marker.distanceToHackReactor.miles;
     const privateRoom = {
       text: `${marker.private ? 'Private' : 'Shared'} Room`,
@@ -52,26 +51,30 @@ class Maps extends Component {
         onCloseclick={this.handleMarkerClick.bind(this, marker)}
       >
         <div className="markerBox">
-          <Link to={`/listing-detail/${marker.listingId}`}>
-            <div className="markerImage">
-              <img
-                alt="" src={`images/${marker.pictures[0]}`}
-              />
-            </div>
-            <div className="markerDetails">
-              <div>
+          <div className="markerImage">
+            <img
+              alt="" src={`images/${marker.pictures[0]}`}
+            />
+          </div>
+          <div className="markerDetails">
+            <div>
+              <Link to={`/listing-detail/${marker.listingId}`}>
                 {marker.description}
-              </div>
-              <div>
-                <i className="fa fa-usd" aria-hidden="true"></i>
-                {marker.price}
-                {' '}
-                <i className="fa fa-bed" aria-hidden="true"></i>
-                {' '}
-                {privateRoom.text}
-              </div>
+              </Link>
             </div>
-          </Link>
+            <div>
+              <i className="fa fa-usd" aria-hidden="true"></i>
+              {marker.price}
+              {' '}
+              <i className="fa fa-bed" aria-hidden="true"></i>
+              {' '}
+              {privateRoom.text}
+              {' '}
+              <i className="fa fa-location-arrow" aria-hidden="true"></i>
+              {' '}
+              {distance} to HR
+            </div>
+          </div>
         </div>
       </InfoWindow>
     );

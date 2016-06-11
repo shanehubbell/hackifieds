@@ -18,20 +18,31 @@ const SidebarEntry = (props) => {
           />
         </div>
         <div className="tableViewItemDetails">
-          <div>
+          <div className="tableViewItemTitle">
             <i className="fa fa-usd" aria-hidden="true"></i>
             {listing.price}
+            {' '}
+            <i className="fa fa-location-arrow" aria-hidden="true"></i>
+            {' '}
+            {distance} from HR
+          </div>
+          <div>
             {' '}
             <i className="fa fa-bed" aria-hidden="true"></i>
             {' '}
             {privateRoom.text}
-            {' with '}
+          </div>
+          <div>
+            {' '}
+            <i className="fa fa-bed" aria-hidden="true"></i>
+            {' '}
             {numOfBathrooms}
           </div>
           <div>
-            {distance} to Hack Reactor
+            <i className="fa fa-map-o" aria-hidden="true"></i>
+            {' '}
+            {listing.address}
           </div>
-          {listing.address}
         </div>
       </div>
     </Link>
