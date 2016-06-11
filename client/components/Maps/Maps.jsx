@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { GoogleMapLoader, GoogleMap, InfoWindow, Marker } from 'react-google-maps';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 class Maps extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Maps extends Component {
   }
 
   handleMapClick(e) {
-    // use this to close the info window...
+
   }
 
   handleMarkerClick(marker) {
@@ -40,13 +41,40 @@ class Maps extends Component {
   }
 
   renderInfoWindow(ref, marker) {
+    const distance = marker.distanceToHackReactor.miles;
+    const privateRoom = {
+      text: `${marker.private ? 'Private' : 'Shared'} Room`,
+    };
     return (
       <InfoWindow
         key={`${ref}_info_window`}
         onCloseclick={this.handleMarkerClick.bind(this, marker)}
       >
         <div className="markerBox">
-          Listing info should go here...
+          <div className="markerImage">
+            <img
+              alt="" src={`images/${marker.pictures[0]}`}
+            />
+          </div>
+          <div className="markerDetails">
+            <div>
+              <Link to={`/listing-detail/${marker.listingId}`}>
+                {marker.description}
+              </Link>
+            </div>
+            <div>
+              <i className="fa fa-usd" aria-hidden="true"></i>
+              {marker.price}
+              {' '}
+              <i className="fa fa-bed" aria-hidden="true"></i>
+              {' '}
+              {privateRoom.text}
+              {' '}
+              <i className="fa fa-location-arrow" aria-hidden="true"></i>
+              {' '}
+              {distance} to HR
+            </div>
+          </div>
         </div>
       </InfoWindow>
     );
@@ -67,7 +95,7 @@ class Maps extends Component {
         googleMapElement={
           <GoogleMap
             ref={(map) => (this._googleMapComponent = map)}
-            defaultZoom={10}
+            defaultZoom={14}
             center={this.state.center}
             onClick={this.handleMapClick}
             onBoundsChanged={this.handleViewChanged}

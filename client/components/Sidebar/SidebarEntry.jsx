@@ -11,28 +11,38 @@ const SidebarEntry = (props) => {
 
   return (
     <Link to={`/listing-detail/${listing.listingId}`}>
-      <div className="tableViewItem" key={listing.listingId} onClick={props.onClick}>
+      <div className="tableViewItem" key={listing.listingId}>
         <div className="tableViewItemImage">
           <img
             alt="" src={`images/${listing.pictures[0]}`}
           />
         </div>
         <div className="tableViewItemDetails">
-          <div>
+          <div className="tableViewItemTitle">
             <i className="fa fa-usd" aria-hidden="true"></i>
             {listing.price}
+            {' '}
+            <i className="fa fa-location-arrow" aria-hidden="true"></i>
+            {' '}
+            {distance} from HR
+          </div>
+          <div>
             {' '}
             <i className="fa fa-bed" aria-hidden="true"></i>
             {' '}
             {privateRoom.text}
           </div>
           <div>
-            Total bathrooms: {numOfBathrooms}
+            {' '}
+            <i className="fa fa-bed" aria-hidden="true"></i>
+            {' '}
+            {numOfBathrooms}
           </div>
           <div>
-            {distance} to Hack Reactor
+            <i className="fa fa-map-o" aria-hidden="true"></i>
+            {' '}
+            {listing.address}
           </div>
-          {listing.address}
         </div>
       </div>
     </Link>
