@@ -24,11 +24,18 @@ class Maps extends Component {
   }
 
   handleMapClick(e) {
-    // use this close the info window...
+    // use this to close the info window...
   }
 
   handleMarkerClick(marker) {
     marker.showInfo = true;
+    console.log('marker clicked-->', marker);
+    this.setState(this.state);
+  }
+
+  handleMarkerClose(marker) {
+    marker.showInfo = false;
+    console.log('marker closed-->', marker);
     this.setState(this.state);
   }
 
@@ -71,8 +78,13 @@ class Maps extends Component {
               return (
                 <Marker
                   {...marker}
+                  position={
+                    { lat: marker.lat, lng: marker.lng }
+                  }
+                  key={listingId}
                   ref={ref}
-                  onClick={this.handleMarkerClick.bind(this, marker)} >
+                  onClick={this.handleMarkerClick.bind(this, marker)}
+                >
                   {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
                 </Marker>
               );
@@ -88,6 +100,10 @@ const mapStateToProps = function mapStateToProps(state) {
   return {
     markers: state.filteredListings,
   };
+};
+
+Maps.propTypes = {
+  markers: React.PropTypes.object,
 };
 
 export default connect(mapStateToProps)(Maps);

@@ -17,10 +17,6 @@ class FilterContainer extends Component {
     this.handleFormChange = this.handleFormChange.bind(this);
   }
 
-  componentWillMount() {
-    this.handleFormChange();
-  }
-
   handlePrivateChange(e) {
     this.setState({
       options: {
