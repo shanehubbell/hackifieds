@@ -7,6 +7,7 @@ const Sidebar = (props) => (
       {Object.keys(props.filteredListings).map((listingId) => (
         <div>
           <SidebarEntry key={listingId} listing={props.filteredListings[listingId]} />
+          HELLO
           <br />
         </div>
         )

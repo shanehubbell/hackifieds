@@ -1,0 +1,1 @@
+window.GMAP_SECRET = 'SECRET_KEY_HERE';

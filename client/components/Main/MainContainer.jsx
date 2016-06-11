@@ -5,7 +5,7 @@ import store from '../../redux/store';
 import actions from '../../redux/actions';
 import api from '../../api.js';
 import _ from 'lodash';
-// import { setListings } from '../api/listings';
+
 class MainContainer extends Component {
 
   componentWillMount() {
