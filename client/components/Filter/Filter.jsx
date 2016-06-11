@@ -2,42 +2,69 @@ import React from 'react';
 
 const Filter = (props) => (
   <div>
+    <br /><br />
     <form className="pure-form pure-form-stacked" onChange={props.handleFormChange}>
       <fieldset>
-        <legend>Filter hacker spaces </legend>
+
+        <legend className="is-center">
+          <h1>The Hacker Space</h1>
+        </legend>
 
         <div className="pure-g">
-          <div className="pure-u-1 pure-u-md-1-2">
-            <label>Max Price</label>
+          <div className="pure-u-1 pure-u-md-1-3">
+            <label><h2>Max Price</h2></label>
             <input
-              type="text" name="price" onChange={props.handlePriceChange}
-              className="pure-u-23-24" value={props.options.price}
+              type="text"
+              name="price"
+              onChange={props.handlePriceChange}
+              className="pure-u-23-24"
+              value={props.options.price}
             />
           </div>
 
-          <div className="pure-u-1 pure-u-md-1-2">
-            <label>Distance (Miles) to Hack Reactor</label>
+          <div className="pure-u-1 pure-u-md-1-3">
+            <label>
+              <h2>Distance (Miles) to Hack Reactor</h2>
+            </label>
+
             <input
-              type="text" name="price" onChange={props.handleDistanceChange}
-              className="pure-u-23-24" value={props.options.distance}
+              type="text"
+              name="price"
+              onChange={props.handleDistanceChange}
+              className="pure-u-23-24"
+              value={props.options.distance}
             />
           </div>
+
+          <div className="pure-u-1 pure-u-md-1-3">
+            <label className="pure-checkbox">
+              <h2>Filter private rooms</h2>
+            </label>
+            <div id="private">
+              <input
+                type="checkbox"
+                name="private"
+                onChange={props.handlePrivateChange}
+                className="pure-u-23-24 pure-checkbox"
+                value={props.options.private}
+              />
+              <label><i /></label>
+            </div>
+          </div>
+
+          <div className="pure-u-1 pure-u-md-1">
+            <input
+              name="clear-filters"
+              onClick={props.handleClearFilters}
+              className="pure-button"
+              value="Clear filters"
+            />
+          </div>
+
         </div>
-
-        <label className="pure-checkbox">
-          Check for Private Room
-          <input
-            type="checkbox" name="private" onChange={props.handlePrivateChange}
-            className="pure-u-23-24 pure-checkbox" value={props.options.private}
-          />
-        </label>
 
       </fieldset>
     </form>
-    <input
-      name="price" onClick={props.handleClearFilters}
-      className="pure-button" value="Clear filters"
-    />
   </div>
 );
 
