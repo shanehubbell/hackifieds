@@ -47,6 +47,39 @@ const Home = (props) => (
         </div>
       </div>
 
+
+      <div className="grids-example">
+          <div className="pure-g">
+          <div className="pure-u-1-4 pure-u-lg-1-8">
+              <img className="pure-img" src="/assets/1.jpg" alt="" />
+          </div>
+          <div className="pure-u-1-4 pure-u-lg-1-8">
+              <img className="pure-img" src="/assets/2.jpg" alt="" />
+          </div>
+          <div className="pure-u-1-4 pure-u-lg-1-8">
+              <img className="pure-img" src="/assets/3.jpg" alt="" />
+          </div>
+          <div className="pure-u-1-4 pure-u-lg-1-8">
+              <img className="pure-img" src="/assets/4.jpg" alt="" />
+          </div>
+
+          <div className="pure-u-1-4 pure-u-lg-1-8">
+              <img className="pure-img" src="/assets/5.jpg" alt="" />
+          </div>
+          <div className="pure-u-1-4 pure-u-lg-1-8">
+              <img className="pure-img" src="/assets/6.jpg" alt="" />
+          </div>
+          <div className="pure-u-1-4 pure-u-lg-1-8">
+              <img className="pure-img" src="/assets/7.jpg" alt="" />
+          </div>
+          <div className="pure-u-1-4 pure-u-lg-1-8">
+              <img className="pure-img" src="/assets/8.jpg" alt="" />
+          </div>
+      </div>
+
+      </div>
+
+
       <div className="footer l-box is-center">
         <p>
           Made with <span className="fa fa-heart" aria-hidden="true" /> at

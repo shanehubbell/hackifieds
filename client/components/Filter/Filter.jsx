@@ -37,19 +37,18 @@ const Filter = (props) => (
           </div>
 
           <div className="pure-u-1 pure-u-md-1-3">
-            <label className="pure-checkbox">
+            <label >
               <h2>Filter private rooms</h2>
             </label>
-            <div id="private">
-              <input
-                type="checkbox"
-                name="private"
-                onChange={props.handlePrivateChange}
-                className="pure-u-23-24 pure-checkbox"
-                value={props.options.private}
-              />
-              <label><i /></label>
-            </div>
+            <input
+              id="private"
+              type="checkbox"
+              name="private"
+              onChange={props.handlePrivateChange}
+              className="pure-u-23-24 pure-checkbox"
+              value={props.options.private}
+            />
+            <label><i /></label>
           </div>
 
           <div className="pure-u-1 pure-u-md-1">
