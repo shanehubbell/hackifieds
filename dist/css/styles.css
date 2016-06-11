@@ -247,6 +247,38 @@ a.pure-button-primary {
  * On desktops and other large devices, we want to over-ride some
  * of the mobile and tablet styles.
  */
+
+
+.filterBox {
+  border: 2px solid #D6EAF8;
+  -webkit-box-shadow: 0 3px 4px 1px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 0 3px 4px 1px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow: 0 2px 3px 1px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  background-color: white;
+  padding: 1em;
+  margin-top: 80px;
+}
+
+#splashimage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 90%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+}
+
+.is-center {
+  text-align: center;
+}
+
  @media (min-width: 78em) {
   /* We increase the header font size even more */
   .splash-head {
@@ -282,6 +314,9 @@ a.pure-button-primary {
 
 p {
   margin: 15px;
+}
+
+.content-info {
   white-space: pre-wrap;      /* CSS3 */
   white-space: -moz-pre-wrap; /* Firefox */
   white-space: -pre-wrap;     /* Opera <7 */
@@ -291,33 +326,3 @@ p {
   font-family: Verdana;
   font-size: 1.1em;
 }
-
-.filterBox {
-  border: 2px solid #D6EAF8;
-  -webkit-box-shadow: 0 3px 4px 1px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow: 0 3px 4px 1px #ccc;  /* Firefox 3.5 - 3.6 */
-  box-shadow: 0 2px 3px 1px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-  background-color: white;
-  padding: 1em;
-}
-
-#splashimage {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 90%;
-  width: auto;
-  height: auto;
-  z-index: -100;
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  background-size: cover;
-}
-
-.is-center {
-  text-align: center;
-}
-

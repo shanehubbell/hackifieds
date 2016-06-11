@@ -18,7 +18,7 @@ const Home = (props) => (
         <div className="pure-u-md-1-3">
           <div className="l-box">
             <h2 className="is-center">Near Hack Reactor</h2>
-            <p>Right in the heart of the city, Hack Reactor is
+            <p className="content-info">Right in the heart of the city, Hack Reactor is
             within proximity to the magnificent landmarks, beautiful views,
             and of course, the abundance of food choices. Take your breaks
             away from hacking to enjoy lunch and dinner with your peers
@@ -28,7 +28,7 @@ const Home = (props) => (
         <div className="pure-u-md-1-3">
           <div className="l-box">
             <h2 className="is-center">Amazing City Life</h2>
-              <p> When you're not building the next best thing, take some
+              <p className="content-info"> When you're not building the next best thing, take some
               time to explore the city with your peers, and you'll come to realize
               that San Franciscans are some of the nicest people in the world. Whether
               its just a simple chat over coffee or partying it up on Polk street -
@@ -38,7 +38,7 @@ const Home = (props) => (
         <div className="pure-u-md-1-3">
           <div className="l-box">
             <h2 className="is-center">Live with other Hackers</h2>
-            <p>HackBnB was made with love by hackers for hackers - we know what its like,
+            <p className="content-info">HackBnB was made with love by hackers for hackers - we know what its like,
             because we've been there. Curated by existing students and alumni, every listing
             is posted by verified members of the Hack Reactor community, so you have that extra
             layer of comfort knowing that you can talk to those who are currently in the program
