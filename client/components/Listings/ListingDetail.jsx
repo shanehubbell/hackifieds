@@ -1,7 +1,8 @@
 import React from 'react';
 
-const ListingsView = (props) => (
+const ListingDetail = (props) => (
   <div>
+  {console.log('Props inside of ListingDetail ==>', props)}
     <p>Pictures</p>
     {props.listing.pictures.map((image, index) => (
       <img
@@ -31,8 +32,8 @@ const ListingsView = (props) => (
   </div>
 );
 
-ListingsView.propTypes = {
+ListingDetail.propTypes = {
   listing: React.PropTypes.object,
 };
 
-export default ListingsView;
+export default ListingDetail;
