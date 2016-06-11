@@ -11,11 +11,12 @@ class ListingDetailContainer extends Component {
 // single listing
   render() {
     return (
-      <p>hello</p>
+      <div>
+        <ListingDetail listing={this.props.listings[this.props.params.id]} />
+      </div>
     );
   }
 }
-      // <ListingDetail listing={this.props.listings[this.props.params.id]} />
 
 // mapping state to props, grabbing the listings
 const mapStateToProps = function mapStateToProps(state) {
