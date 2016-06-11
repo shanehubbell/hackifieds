@@ -5,7 +5,7 @@ const Home = (props) => (
     <div className="splash-container">
       <img id="splashimage" src="/assets/bb-night.jpg" />
       <div className="splash">
-        <h1 className="splash-head">Hack Here, Grow Here, Live Here</h1>
+        <h1 className="splash-head">Hackbnb: Learn, Hack, Grow</h1>
         <p className="splash-subhead">Discover your home away from home...</p>
         <p>
           <a className="pure-button" href="/auth/github"> Login to Github </a>

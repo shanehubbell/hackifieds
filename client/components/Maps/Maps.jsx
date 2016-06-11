@@ -6,7 +6,7 @@ class Maps extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // bounds: null,
+      bounds: null,
       center: {
         lat: 37.7835896,
         lng: -122.4092149,
