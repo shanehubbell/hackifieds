@@ -15,4 +15,8 @@ const TableView = (props) => (
   </div>
 );
 
+TableView.propTypes = {
+  filteredListings: React.PropTypes.object,
+};
+
 export default TableView;

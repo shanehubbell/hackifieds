@@ -14,7 +14,7 @@ function ensureAuthenticated(req, res, next) {
   return res.redirect('/');
 }
 
-function checkLoginHandler(req, res, next) {
+function checkLoginHandler(req, res) {
   if (req.session.isLoggedIn) {
     // Send back this response so client and use it to update state
     res.json(true);

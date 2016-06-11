@@ -9,7 +9,6 @@ import AddListing from './components/AddListing.jsx';
 import { Router, Route } from 'react-router';
 import store, { history } from './redux/store';
 
-
 const router = (
   <Provider store={store}>
     <Router history={history}>
