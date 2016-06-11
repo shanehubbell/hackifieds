@@ -11,7 +11,7 @@ const SidebarEntry = (props) => {
 
   return (
     <Link to={`/listing-detail/${listing.listingId}`}>
-      <div className="tableViewItem" key={listing.listingId} onClick={props.onClick}>
+      <div className="tableViewItem" key={listing.listingId}>
         <div className="tableViewItemImage">
           <img
             alt="" src={`images/${listing.pictures[0]}`}
