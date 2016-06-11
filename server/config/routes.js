@@ -1,11 +1,24 @@
 const passport = require('passport');
 const path = require('path');
+const crypto = require('crypto');
+const mime = require('mime');
 
 const listingsController = require('../controllers/listingsController.js');
 const imageController = require('../controllers/imageController.js');
 
 const multer = require('multer');
-const upload = multer({ dest: 'dist/images/' });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'dist/images/');
+  },
+  filename: function (req, file, cb) {
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      cb(null, raw.toString('hex') + Date.now() + '.' + mime.extension(file.mimetype));
+    });
+  }
+});
+var upload = multer({ storage: storage });
+// const upload = multer({ dest: 'dist/images/' });
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
@@ -53,12 +66,12 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  // Catch all;
+  app.get('/compressed/*', imageController.getImage);
+
+   // Catch all;
   app.get('/*', (req, res) => {
     res.redirect('/');
   });
-
-  app.get('/compressed/*', imageController.getImage);
 
   app.get('/', (req, res) => {
     console.log(process.pid + 'served u the index');
