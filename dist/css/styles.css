@@ -326,3 +326,7 @@ p {
   font-family: Verdana;
   font-size: 1.1em;
 }
+
+.fa {
+  margin-right: 10px;
+}

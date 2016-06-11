@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Listings from './Listings.jsx';
+import Main from './Main.jsx';
 import { connect } from 'react-redux';
 import store from '../../redux/store';
 import actions from '../../redux/actions';
 import api from '../../api.js';
 import _ from 'lodash';
 // import { setListings } from '../api/listings';
-class ListingsContainer extends Component {
+class MainContainer extends Component {
 
   componentWillMount() {
     this.getListings();
@@ -17,8 +17,13 @@ class ListingsContainer extends Component {
       .then(response => {
         _.each(response.data, (item) => {
           const listing = item;
-          // Converts the pictures array (currently stringified) back into an array
+          // Converts part of the listings back to valid javascript types
           listing.pictures = JSON.parse(listing.pictures);
+          listing.lat = JSON.parse(listing.lat);
+          listing.lng = JSON.parse(listing.lng);
+          listing.price = JSON.parse(listing.price);
+          listing.distanceToHackReactor = JSON.parse(listing.distanceToHackReactor);
+          listing.bathrooms = JSON.parse(listing.bathrooms);
         });
 
         store.dispatch(actions.setListings(response.data));
@@ -28,7 +33,7 @@ class ListingsContainer extends Component {
 
   render() {
     return (
-      <Listings {...this.props} />
+      <Main {...this.props} />
     );
   }
 }
@@ -48,4 +53,4 @@ const mapDispatchToProps = function mapDispatchToProps(/* dispatch */) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListingsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
