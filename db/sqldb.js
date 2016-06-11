@@ -15,7 +15,7 @@ const Listing = db.define('Listing', {
   private: { type: Sequelize.BOOLEAN },
   ownerName: { type: Sequelize.STRING },
   ownerEmail: { type: Sequelize.STRING },
-  pictures: { type: Sequelize.STRING },
+  pictures: { type: Sequelize.TEXT },
   description: { type: Sequelize.TEXT },
 }, {
   timestamps: false,
