@@ -13,6 +13,7 @@ class ListingDetailContainer extends Component {
     return (
       <div>
         <ListingDetail listing={this.props.listings[this.props.params.id]} />
+        }
       </div>
     );
   }
