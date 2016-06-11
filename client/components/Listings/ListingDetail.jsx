@@ -7,11 +7,12 @@ const ListingsView = (props) => (
       <img
         src={'/images/'+image}
         key={index}
-        className="photo-box u-1 u-med-1-2 u-lrg-1-3"
+        className="photo-box u-1 u-med-1-2 u-lrg-1-3 table-image"
         alt
       />
       ))
     }
+    <br/>
     <h1>Description: {props.listing.description}</h1>
     <h2>Address: {props.listing.address}</h2>
     <p>Bathrooms: {props.listing.address}</p>
