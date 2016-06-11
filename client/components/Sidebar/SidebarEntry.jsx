@@ -25,9 +25,8 @@ const SidebarEntry = (props) => {
             <i className="fa fa-bed" aria-hidden="true"></i>
             {' '}
             {privateRoom.text}
-          </div>
-          <div>
-            Total bathrooms: {numOfBathrooms}
+            {' with '}
+            {numOfBathrooms}
           </div>
           <div>
             {distance} to Hack Reactor
