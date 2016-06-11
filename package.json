@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "nodemon server/server.js --ignore components",
-    "cluster": "nodemon server/cluster.js --ignore components"
+    "cluster": "nodemon server/cluster/server.js --ignore components"
   },
   "dependencies": {
     "axios": "^0.12.0",
