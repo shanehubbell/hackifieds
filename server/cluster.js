@@ -11,7 +11,8 @@ const GoogleMapsAPI = require('googlemaps');
 const distance = require('google-distance-matrix');
 
 const imagemin = require('imagemin');
-
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminPngquant = require('imagemin-pngquant');
 const keys = require('./auth/keys.js');
 
 
@@ -140,7 +141,9 @@ const img = (pictures, done) => {
   console.log('pictures!!', pictures);
   for (var i = 0; i < pictures.length; i++) {
     var picId = pictures[i];
-    imagemin(['dist/images/' + pictures[i]], null)
+    imagemin(['dist/images/' + picId], 'dist/compressed',
+    { plugins: [imageminMozjpeg({ quality: 90 }),
+    imageminPngquant({ quality: '65-80' })] })
     .then((files) => {
       console.log(files);
       imageController.addImage(picId, files[0].data, (err, res) => {
@@ -150,15 +153,21 @@ const img = (pictures, done) => {
         console.log(res);
       });
       //=> [{data: <Buffer 89 50 4e …>, path: 'build/images/foo.jpg'}, …]
+    })
+    .catch((err) => {
+      console.log(err);
     });
   }
   done();
 };
 
+const array = [];
 const workerJob = () => {
   // listen for new listings that need to be processed
   process.on('message', (listing) => {
-    listingQueue.enqueue(listing);
+    console.log('im enqueueing ', listing);
+    array.push(listing);
+    // listingQueue.enqueue(listing);
   });
 
   const processListing = (listingId, callback) => {
@@ -184,16 +193,17 @@ const workerJob = () => {
   };
 
   const workerLoop = () => {
-    if (listingQueue.size() === 0) {
+    if (array.length === 0) {
       setTimeout(workerLoop, 1000);
     } else {
-      const listing = listingQueue.dequeue();
-      process.send({ msg: 'processing listing' });
+      const listing = array.pop();
+      process.send({ msg: 'processing listing', listing });
+
       processListing(listing, (err) => {
         if (!err) {
           process.send({ msg: 'success listing processed' });
         } else {
-          listingQueue.enqueue(listing);
+          array.push(listing);
         }
         // keep processing listings
         setTimeout(workerLoop, 1000);

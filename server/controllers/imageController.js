@@ -2,13 +2,13 @@ const mongodb = require('../../db/mongodb');
 
 module.exports = {
   postImage: function postImage(req, res) {
+    console.log('posted this image to the images folder', req.file.filename);
     res.end(req.file.filename);
   },
   addImage: function addImage(imgId, buffer, callback) {
-    console.log('inside image controller', imgId);
     var image = new mongodb.Image({ _id: imgId, data: buffer });
-    console.log(image);
     image.save((err, res) => {
+      console.log('saved image to mongodb with id: ', imgId);
       callback(err, res);
     });
   },

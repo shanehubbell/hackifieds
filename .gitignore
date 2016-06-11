@@ -1,5 +1,6 @@
 node_modules
 .DS_Store
 dist/images
+dist/compressed
 server/auth/keys.js
 dist/auth/keys.js
