@@ -1,21 +1,23 @@
 const cluster = require('cluster');
 
 const children = {};
-const Queue = require('./queueStack').Queue;
-const listingQueue = new Queue();
 
+// db controllers
 const listingsController = require('./controllers/listingsController.js');
 const imageController = require('./controllers/imageController.js');
 
 const GoogleMapsAPI = require('googlemaps');
 const distance = require('google-distance-matrix');
 
+// compression modules
 const imagemin = require('imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
+
+// auth keys
 const keys = require('./auth/keys.js');
 
-
+// console.log helper
 const log = (p, msg) => {
   var name;
   var pid;
@@ -49,6 +51,7 @@ const masterJob = () => {
       // listen for messages from the http server
       children.server.on('message', (msg) => {
         log(children.server, 'got a message from the http server' + JSON.stringify(msg));
+
         // let the worker know there is a new listing he needs to proccess
         children.worker.send(msg.listingId);
       });
@@ -98,46 +101,59 @@ const updateListing = (listingId, lat, lng, distanceToHackReactor) => {
     });
 };
 
-const gmap = (listingId, address, done) => {
+const processGmap = (listingId, address, done) => {
+  // tasks before callback
+  var tasks = 2;
+
+  // get lat lng
   var lat;
   var lng;
-  var distanceToHackReactor;
-  var tasks = 2;
-  distance.key = keys.GMAP_SECRET;
-  distance.units('imperial');
 
   const publicConfig = {
     key: keys.GMAP_SECRET,
     secure: true,
   };
-
   const gmapAPI = new GoogleMapsAPI(publicConfig);
 
+  // get distance to hr
+  var distanceToHackReactor;
+  distance.key = keys.GMAP_SECRET;
+  distance.units('imperial');
+
+
   gmapAPI.geocode({ address }, (err, data) => {
-    lat = data.results[0].geometry.location.lat;
-    lng = data.results[0].geometry.location.lng;
-    console.log('gmap', lat, lng);
-    if (--tasks === 0) {
-      updateListing(listingId, lat, lng, distanceToHackReactor);
-      done();
+    if (!err) {
+      lat = data.results[0].geometry.location.lat;
+      lng = data.results[0].geometry.location.lng;
+      console.log('gmap processed: ', lat, lng);
+      if (--tasks === 0) {
+        updateListing(listingId, lat, lng, distanceToHackReactor);
+        done();
+      }
+    } else {
+      console.log(err);
     }
   });
 
   distance.matrix([address], ['8, 944 Market St, San Francisco, CA 94102'],
     (err, data) => {
-      distanceToHackReactor = {
-        miles: data.rows[0].elements[0].distance.text,
-        time: data.rows[0].elements[0].duration.text,
-      };
-      console.log('distance: ', distanceToHackReactor);
-      if (--tasks === 0) {
-        updateListing(listingId, lat, lng, distanceToHackReactor);
-        done();
+      if (!err) {
+        distanceToHackReactor = {
+          miles: data.rows[0].elements[0].distance.text,
+          time: data.rows[0].elements[0].duration.text,
+        };
+        console.log('distance processd: ', distanceToHackReactor);
+        if (--tasks === 0) {
+          updateListing(listingId, lat, lng, distanceToHackReactor);
+          done();
+        }
+      } else {
+        console.log(err);
       }
     });
 };
 
-const img = (pictures, done) => {
+const processImages = (pictures, done) => {
   console.log('pictures!!', pictures);
   for (var i = 0; i < pictures.length; i++) {
     var picId = pictures[i];
@@ -161,49 +177,51 @@ const img = (pictures, done) => {
   done();
 };
 
-const array = [];
+
 const workerJob = () => {
+  const processStack = [];
+
   // listen for new listings that need to be processed
   process.on('message', (listing) => {
     console.log('im enqueueing ', listing);
-    array.push(listing);
-    // listingQueue.enqueue(listing);
+    processStack.push(listing);
   });
 
   const processListing = (listingId, callback) => {
     var tasksLeft = 2;
     listingsController.getListing(listingId, (err, listing) => {
       if (!err) {
-        gmap(listingId, listing.address, () => {
+        processGmap(listingId, listing.address, () => {
           if (--tasksLeft === 0) {
-            console.log('processed', listing.listingId);
+            console.log('finshed processing both gmaps and images for: ', listing.listingId);
             callback(null);
           }
         });
-        img(JSON.parse(listing.pictures), () => {
+        processImages(JSON.parse(listing.pictures), () => {
           if (--tasksLeft === 0) {
-            console.log('processed', listing.listingId);
+            console.log('finshed processing both gmaps and images for: ', listing.listingId);
             callback(null);
           }
         });
       } else {
-        console.log(err);
+        callback(err);
       }
     });
   };
 
+
   const workerLoop = () => {
-    if (array.length === 0) {
+    if (processStack.length === 0) {
       setTimeout(workerLoop, 1000);
     } else {
-      const listing = array.pop();
+      const listing = processStack.pop();
       process.send({ msg: 'processing listing', listing });
 
       processListing(listing, (err) => {
         if (!err) {
           process.send({ msg: 'success listing processed' });
         } else {
-          array.push(listing);
+          processStack.push(listing);
         }
         // keep processing listings
         setTimeout(workerLoop, 1000);
