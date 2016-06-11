@@ -37,8 +37,14 @@ const masterJob = () => {
       children.server.on('message', (msg) => {
         log(children.server, 'got a message from the http server' + JSON.stringify(msg));
 
-        // let the worker know there is a new listing he needs to proccess
-        children.worker.send(msg.listingId);
+        // let the worker know there is a new listing or email he needs to process
+        if (msg.listingId) {
+          children.worker.send(msg.listingId);
+        } else if (msg.email) {
+          children.email.send(msg.email);
+        } else {
+          console.log('unrecognized message from http server');
+        }
       });
     }
   };
@@ -64,9 +70,31 @@ const masterJob = () => {
     }
   };
 
+  const checkOnEmail = () => {
+    if (children.email === undefined) {
+      log('master', 'starting email');
+      children.email = cluster.fork({ ROLE: 'email' });
+      children.email.name = 'email';
+
+      children.email.on('online', () => {
+        log(children.email, 'ready');
+      });
+      children.email.on('exit', () => {
+        log(children.email, 'died');
+        delete children.email;
+      });
+
+      // listen for messages from the email worker
+      children.email.on('message', (msg) => {
+        log(children.email, JSON.stringify(msg));
+      });
+    }
+  };
+
   const masterLoop = () => {
     checkOnHTTPServer();
     checkOnWorker();
+    checkOnEmail();
   };
 
   // keep checking to see if anyone of them are dead so we can remake them
@@ -83,6 +111,8 @@ if (cluster.isMaster) {
   if (process.env.ROLE === 'worker') {
     const worker = require('./worker.js');
     worker.workerJob();
+  } else if (process.env.ROLE === 'email') {
+    
   } else {
     httpJob();
   }
