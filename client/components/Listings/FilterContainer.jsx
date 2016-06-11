@@ -9,12 +9,16 @@ class FilterContainer extends Component {
     this.state = {
       options: {
         private: false,
-        price: 3000,
+        price: 2000,
       },
     };
     this.handlePrivateChange = this.handlePrivateChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.handleFormChange();
   }
 
   handlePrivateChange(e) {
