@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import actions from '../../redux/actions';
+import store from '../../redux/store';
 import Filter from './Filter.jsx';
 
 class FilterContainer extends Component {
@@ -10,11 +11,14 @@ class FilterContainer extends Component {
       options: {
         private: false,
         price: 2000,
+        distance: 5,
       },
     };
     this.handlePrivateChange = this.handlePrivateChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleDistanceChange = this.handleDistanceChange.bind(this);
+    this.handleClearFilters = this.handleClearFilters.bind(this);
   }
 
   handlePrivateChange(e) {
@@ -22,6 +26,7 @@ class FilterContainer extends Component {
       options: {
         private: e.target.checked,
         price: this.state.options.price,
+        distance: this.state.options.distance,
       },
     });
   }
@@ -31,8 +36,25 @@ class FilterContainer extends Component {
       options: {
         private: this.state.options.private,
         price: +e.target.value,
+        distance: this.state.options.distance,
       },
     });
+  }
+
+  handleDistanceChange(e) {
+    this.setState({
+      options: {
+        private: this.state.options.private,
+        price: this.state.options.price,
+        distance: +e.target.value,
+      },
+    });
+  }
+
+  handleClearFilters(e) {
+    console.log('activate handle clear filters');
+    e.preventDefault();
+    store.dispatch(actions.setFilteredListings(this.props.listings));
   }
 
   handleFormChange() {
@@ -48,6 +70,8 @@ class FilterContainer extends Component {
         handlePrivateChange={this.handlePrivateChange}
         handlePriceChange={this.handlePriceChange}
         handleFormChange={this.handleFormChange}
+        handleClearFilters={this.handleClearFilters}
+        handleDistanceChange={this.handleDistanceChange}
 
         options={this.state.options}
       />
