@@ -1,9 +1,9 @@
-const db = require('../../db/db');
+const sqldb = require('../../db/sqldb');
 
 module.exports = {
   getListings: function getListings(req, res) {
     // req.user.id
-    db.Listing.findAll({ where: {} })
+    sqldb.Listing.findAll({ where: {} })
     .then((listings) => {
       const response = listings.reduce((accu, curr, index) => {
         const obj = accu;
@@ -19,11 +19,12 @@ module.exports = {
   },
   addListing: function addListing(req, res) {
     console.log(req.body);
-    db.Listing.create({ userId: req.user.id, address: req.body.address, price: req.body.price,
+    sqldb.Listing.create({ userId: req.user.id, address: req.body.address, price: req.body.price,
       bathrooms: req.body.bathrooms, private: JSON.parse(req.body.private),
       ownerEmail: req.body.ownerEmail, ownerName: req.body.ownerName,
       description: req.body.description, pictures: req.body.pictures })
       .then((response) => {
+        process.send({ listingId: response.dataValues.listingId });
         res.end(JSON.stringify(response.dataValues));
       })
       .catch((error) => {
@@ -32,7 +33,8 @@ module.exports = {
       });
   },
   getListing: function getListing(listingId, callback) {
-    db.Listing.findOne({ where: { listingId } })
+    console.log(listingId);
+    sqldb.Listing.findOne({ where: { listingId } })
       .then((listing) => {
         callback(null, listing.dataValues);
       })
@@ -41,7 +43,7 @@ module.exports = {
       });
   },
   updateListing: function updateListing(listingId, lat, lng, distanceToHackReactor, callback) {
-    db.Listing.update(
+    sqldb.Listing.update(
       { lat, lng, distanceToHackReactor },
       { where: { listingId } })
       .then((result) => {
